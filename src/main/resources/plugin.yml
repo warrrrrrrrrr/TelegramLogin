@@ -1,0 +1,9 @@
+name: TelegramLogin
+main: it.ivirus.ultimatehorses.TelegramLogin
+author: iVirus
+version: 1.0
+api-version: 1.13
+commands:
+  telegramlogin:
+    description: main command
+    aliases: [tlogin]
