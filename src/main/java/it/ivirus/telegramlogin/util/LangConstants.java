@@ -7,6 +7,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 public enum LangConstants {
 
     PREFIX("prefix"),
+    TG_ADD_MESSAGE("info.telegram.addMessage"),
+    TG_LOGIN_MESSAGE("info.telegram.loginMessage"),
+    TG_LOCKED_MESSAGE("info.telegram.lockedMessage"),
+    TG_ABORT_BUTTON_TEXT("info.telegram.abortButton"),
+    TG_CONFIRM_BUTTON_TEXT("info.telegram.confirmButton"),
+    TG_LOCK_BUTTON_TEXT("info.telegram.lockButton"),
+    TG_UNLOCK_BUTTON_TEXT("info.telegram.unlockButton"),
+    TG_EXECUTED_MESSAGE("info.telegram.executed"),
+    TG_ABORTED_MESSAGE("info.telegram.aborted"),
     NOPERMISSION("errors.noPermission");
 
 

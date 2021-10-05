@@ -1,5 +1,6 @@
 package it.ivirus.telegramlogin.telegram;
 
+import it.ivirus.telegramlogin.util.LangConstants;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -8,12 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KeyboardFactory {
-    public static ReplyKeyboard withTodayTomorrowButtons() {
+    public static ReplyKeyboard addConfirmButtons(String playerName, String idChat) {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
         List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        rowInline.add(new InlineKeyboardButton().setText(Constants.TRAINING_TODAY).setCallbackData(Constants.TRAINING_TODAY));
-        rowInline.add(new InlineKeyboardButton().setText(Constants.TRAINING_TOMORROW).setCallbackData(Constants.TRAINING_TOMORROW));
+        InlineKeyboardButton confirmButton = new InlineKeyboardButton();
+        confirmButton.setText(LangConstants.TG_CONFIRM_BUTTON_TEXT.getString());
+        confirmButton.setCallbackData("/addconfirm " + playerName + " " + idChat);
+        rowInline.add(confirmButton);
+        InlineKeyboardButton abortButton = new InlineKeyboardButton();
+        abortButton.setText(LangConstants.TG_ABORT_BUTTON_TEXT.getString());
+        abortButton.setCallbackData("/addabort " + playerName + " " + idChat);
+        rowInline.add(abortButton);
         rowsInline.add(rowInline);
         inlineKeyboard.setKeyboard(rowsInline);
         return inlineKeyboard;
