@@ -33,11 +33,16 @@ public class TelegramLogin extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        getLogger().info("Creating files...");
         saveDefaultConfig();
         this.createLangFile("en_US", "it_IT");
+        getLogger().info("Loading language...");
         this.loadLangConfig();
+        getLogger().info("Started database setup...");
         this.setupDb();
+        getLogger().info("Starting bot...");
         startBot();
+        getLogger().info("Plugin is ready!");
     }
 
     private void setupDb() {
@@ -62,7 +67,7 @@ public class TelegramLogin extends JavaPlugin {
             MySQL mysql = (MySQL) sql;
             mysql.closePool();
         }
-        botThread.interrupt();
+        botThread.stop();
     }
 
     private void startBot(){
