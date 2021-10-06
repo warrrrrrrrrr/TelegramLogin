@@ -1,0 +1,35 @@
+prefix: "&8(&bTelegram&fLogin&8)&r"
+errors:
+  noPermission: "%prefix%&7: &cPermesso negato."
+  chatIdAlreadyUsed: "&cQuesto chatId è gia utilizzato da qualcun altro! Riprova."
+  invalidValue: "&cValore non valido"
+
+info:
+  telegram: #--------- Bot Messages -------------------------------------------------------------------------
+    addMessage: "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F \n\uD83C\uDF10 \u00BB %player_ip% \nConferma setup \n(Seleziona cosa vuoi fare)"
+    loginMessage: "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F \n\uD83C\uDF10 \u00BB %player_ip% \n (Seleziona cosa vuoi fare)"
+    lockedMessage: "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F \nPremi 'Sblocca' prima di entrare."
+    abortButton: "\u274C Annulla"
+    confirmButton: "\uD83D\uDFE2 Conferma"
+    lockButton: "\u26D4\uFE0F Blocca"
+    unlockButton: "\uD83D\uDFE2 Sblocca"
+    executed: "\u2705 Eseguito"
+    aborted: "\u274C Annullato"
+    #------------------------------------------------------------------------------------------------
+  addChatId:
+    - "&8&m-------------------------------------------"
+    - "&7Scrivi in chat il tuo chatId di Telegram"
+    - "&7Lo puoi recuperare utilizzando"
+    - "&7utilizzando il seguente bot: &b@chatid_echo_bot"
+    - "&cAssicurati di aver avviato prima"
+    - "&cil nostro bot: &b%bot_tag%"
+    - "&8&m-------------------------------------------"
+  waitForConfirm: "%prefix%&7: Controlla il bot per confermare il tuo chatId e quindi loggarti."
+  waitForLoginConfirm: "%prefix%&7: Controlla il bot per loggarti."
+  operationAborted: "%prefix%&7: Operazione annullata"
+  kick_logagain: "%prefix%&7: Rilogga"
+  accountLinked:
+    - "&8&m-------------------------------------------"
+    - "&bHai collegato con successo il tuo account a telegram!"
+    - "&8&m-------------------------------------------"
+  abort2FA: "%prefix%&7: Digita &cabort &7per annullare l'attivazione del 2FA."

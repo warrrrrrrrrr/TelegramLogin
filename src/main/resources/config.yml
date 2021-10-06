@@ -1,3 +1,41 @@
+language: en_US
+#########################################################################
+#                       Database Config                                 #
+#########################################################################
+MySQL:
+  Enable: false                  #if false, SQLite will be used.
+  Database: "TelegramLogin"
+  Username: "TelegramLogin"
+  Password: "YourPassword"
+  Host: "localhost"
+  Port: 3306
+  SSL: false
+
+bungee: false   #Enable if you are running inside a network (remember, place this plugin in bungeecord plugins too)
+
+#########################################################################
+#                       Bot Config                                      #
+#########################################################################
 bot:
   name: "TelegramLogin"
-  token:
+  token: "875694660:AAF3oBELJKgb5LeqlQ-jA41I2GGtQtOxepk"
+  allowedCommands:
+    - "/login"
+    - "/register"
+
+#########################################################################
+#                       PremiumLogin Section                            #
+#########################################################################
+premium:
+  enabled: false #if true, who will execute /premium will bypass telegram login.
+
+
+#########################################################################
+#                          2FA Section                                  #
+#########################################################################
+2FA:
+  enabled: false  #if false plugin will be used as primary login system (disabling every commands)
+                  #if true you will be able to execute commands in "allowedCommands"
+  allowedCommands:
+    - "/login"
+    - "/register"

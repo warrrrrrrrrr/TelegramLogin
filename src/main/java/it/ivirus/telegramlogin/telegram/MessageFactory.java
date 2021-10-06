@@ -5,11 +5,11 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 public class MessageFactory {
 
-    public SendMessage addConfirm(String playerName, String chatId){
+    public static SendMessage addConfirm(String playerUUID, String chatId){
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(LangConstants.TG_ADD_MESSAGE.getString());
-        sendMessage.setReplyMarkup(KeyboardFactory.addConfirmButtons(playerName, chatId));
+        sendMessage.setReplyMarkup(KeyboardFactory.addConfirmButtons(playerUUID, chatId));
         return sendMessage;
     }
 }

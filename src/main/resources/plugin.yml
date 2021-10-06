@@ -1,5 +1,5 @@
 name: TelegramLogin
-main: it.ivirus.ultimatehorses.TelegramLogin
+main: it.ivirus.telegramlogin.TelegramLogin
 author: iVirus
 version: 1.0
 api-version: 1.13

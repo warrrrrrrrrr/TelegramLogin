@@ -3,8 +3,11 @@ package it.ivirus.telegramlogin;
 import it.ivirus.telegramlogin.database.SQLite;
 import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
+import it.ivirus.telegramlogin.spigot.listeners.PlayerListener;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
+import it.ivirus.telegramlogin.util.Util;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +17,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.concurrent.Executor;
 
 @Getter
 public class TelegramLogin extends JavaPlugin {
@@ -24,6 +28,7 @@ public class TelegramLogin extends JavaPlugin {
     private SqlManager sql;
     private File langFile;
     private FileConfiguration langConfig;
+    private final Executor executor = runnable -> Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
 
     @Override
     public void onEnable() {
@@ -51,6 +56,15 @@ public class TelegramLogin extends JavaPlugin {
         }
     }
 
+    @Override
+    public void onDisable() {
+        if (getConfig().getBoolean("MySQL.Enable")){
+            MySQL mysql = (MySQL) sql;
+            mysql.closePool();
+        }
+        botThread.interrupt();
+    }
+
     private void startBot(){
         botThread = new Thread(() -> {
             try {
@@ -72,7 +86,7 @@ public class TelegramLogin extends JavaPlugin {
     }
 
     private void loadLangConfig() {
-        langFile = new File(getDataFolder(), "languages" + File.separator + getConfig().getString("plugin.language") + ".yml");
+        langFile = new File(getDataFolder(), "languages" + File.separator + getConfig().getString("language") + ".yml");
         if (!langFile.exists()) {
             langFile = new File(getDataFolder(), "languages" + File.separator + "en_US.yml");
         }

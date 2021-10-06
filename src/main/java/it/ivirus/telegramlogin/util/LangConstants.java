@@ -16,6 +16,12 @@ public enum LangConstants {
     TG_UNLOCK_BUTTON_TEXT("info.telegram.unlockButton"),
     TG_EXECUTED_MESSAGE("info.telegram.executed"),
     TG_ABORTED_MESSAGE("info.telegram.aborted"),
+    ADD_CHATID("info.addChatId"),
+    WAIT_FOR_LOGIN_CONFIRM("info.waitForLoginConfirm"),
+    INVALID_VALUE("errors.invalidValue"),
+    OPERATION_ABORTED("info.operationAborted"),
+    KICK_LOG_AGAIN("info.kick_logagain"),
+    CHATID_ALREADY_USED("errors.chatIdAlreadyUsed"),
     NOPERMISSION("errors.noPermission");
 
 
@@ -34,8 +40,12 @@ public enum LangConstants {
 
     public String getString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String s : lang.getStringList(path)) {
-            stringBuilder.append(s + "\n");
+        if (lang.isList(path)){
+            for (String s : lang.getStringList(path)) {
+                stringBuilder.append(s + "\n");
+            }
+        } else {
+            return lang.getString(path).replaceAll("%prefix%", getPrefix());
         }
         return stringBuilder.toString().replaceAll("%prefix%", getPrefix());
     }
