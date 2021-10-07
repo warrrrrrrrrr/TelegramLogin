@@ -22,29 +22,27 @@ public class PlayerListener implements Listener {
     private final PlayerData playerData = PlayerData.getInstance();
     private final TelegramBot bot;
 
-    public PlayerListener(TelegramLogin plugin, TelegramBot bot){
+    public PlayerListener(TelegramLogin plugin, TelegramBot bot) {
         this.plugin = plugin;
         this.bot = bot;
     }
 
     @EventHandler
-    public void onPlayerInsertChatID(AsyncPlayerChatEvent event){
+    public void onPlayerInsertChatID(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
-        if (playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())){
+        if (playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
             event.setCancelled(true);
             String chatId = event.getMessage();
-            if (chatId.equalsIgnoreCase("abort")){
+            if (chatId.equalsIgnoreCase("abort")) {
                 playerData.getPlayerWaitingForChatid().remove(player.getUniqueId());
                 if (plugin.getConfig().getBoolean("2FA.enabled")) {
                     player.sendMessage(LangConstants.OPERATION_ABORTED.getFormattedString());
                     return;
                 }
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    player.kickPlayer(LangConstants.KICK_LOG_AGAIN.getFormattedString());
-                },1);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_LOG_AGAIN.getFormattedString()), 1);
                 return;
             }
-            if (!NumberUtils.isNumber(chatId)){
+            if (!NumberUtils.isNumber(chatId)) {
                 player.sendMessage(LangConstants.INVALID_VALUE.getFormattedString());
                 return;
             }
@@ -53,10 +51,11 @@ public class PlayerListener implements Listener {
                 if (throwable != null)
                     throwable.printStackTrace();
             }).thenAccept(telegramPlayer -> {
-                if (telegramPlayer == null){
+                if (telegramPlayer == null) {
                     plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), chatId, date);
                     try {
                         bot.execute(MessageFactory.addConfirm(player.getUniqueId().toString(), chatId));
+                        player.sendMessage(LangConstants.WAIT_FOR_CONFIRM.getFormattedString());
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
                     }

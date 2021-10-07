@@ -25,6 +25,7 @@ public class TelegramLogin extends JavaPlugin {
     private static TelegramLogin instance;
     private Thread botThread;
     private TelegramBotsApi botsApi;
+    private TelegramBot bot;
     private SqlManager sql;
     private File langFile;
     private FileConfiguration langConfig;
@@ -74,7 +75,8 @@ public class TelegramLogin extends JavaPlugin {
         botThread = new Thread(() -> {
             try {
                 botsApi = new TelegramBotsApi(DefaultBotSession.class);
-                botsApi.registerBot(new TelegramBot(this));
+                bot = new TelegramBot(this);
+                botsApi.registerBot(bot);
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }

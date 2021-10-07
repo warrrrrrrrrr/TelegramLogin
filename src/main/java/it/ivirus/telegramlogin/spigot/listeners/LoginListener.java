@@ -36,7 +36,7 @@ public class LoginListener implements Listener {
             } else {
                 playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
                 try {
-                    bot.execute(MessageFactory.addConfirm(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID()));
+                    bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), event.getRealAddress().toString()));
                     player.sendMessage(LangConstants.WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
