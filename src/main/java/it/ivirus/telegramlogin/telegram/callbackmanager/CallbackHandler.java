@@ -24,9 +24,9 @@ public class CallbackHandler {
     private final Map<String, CallbackCommand> commands = new HashMap<>();
 
     public void run(Update update) {
-        String[] args = update.getCallbackQuery().getMessage().toString().split(" ");
-        if (!commands.containsKey(args[0]))
-            return;
+        String[] args = update.getCallbackQuery().getData().split(" ");
+        if (!commands.containsKey(args[0])) return;
+
         commands.get(args[0]).onUpdateCall(plugin.getBot(), update, args);
     }
 

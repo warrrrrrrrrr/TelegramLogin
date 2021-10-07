@@ -69,7 +69,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId())) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
             Location from = event.getFrom();
             Location to = event.getTo();
             double x = Math.floor(from.getX());

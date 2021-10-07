@@ -17,7 +17,7 @@ public class MessageFactory {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(LangConstants.TG_LOGIN_MESSAGE.getString().replaceAll("%player_ip%", ipAddress));
-        sendMessage.setReplyMarkup(KeyboardFactory.addConfirmButtons(playerUUID, chatId));
+        sendMessage.setReplyMarkup(KeyboardFactory.loginRequestButtons(playerUUID, chatId));
         return sendMessage;
     }
 

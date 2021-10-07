@@ -10,7 +10,6 @@ info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
     addMessage:
     - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
-    - "\uD83C\uDF10 \u00BB %player_ip%"
     - "Conferma setup"
     - "(Seleziona cosa vuoi fare)"
     loginMessage:

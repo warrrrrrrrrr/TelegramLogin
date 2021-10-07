@@ -41,11 +41,11 @@ public class KeyboardFactory {
         abortButton.setText(LangConstants.TG_ABORT_BUTTON_TEXT.getString());
         abortButton.setCallbackData("/abort " + playerUUID + " " + idChat);
 
-        InlineKeyboardButton lock = new InlineKeyboardButton();
-        abortButton.setText(LangConstants.TG_LOCK_BUTTON_TEXT.getString());
-        abortButton.setCallbackData("/lock " + playerUUID + " " + idChat);
+        InlineKeyboardButton lockButton = new InlineKeyboardButton();
+        lockButton.setText(LangConstants.TG_LOCK_BUTTON_TEXT.getString());
+        lockButton.setCallbackData("/lock " + playerUUID + " " + idChat);
         firstrowInline.add(abortButton);
-        secondrowInline.add(lock);
+        secondrowInline.add(lockButton);
         rowsInline.add(firstrowInline);
         rowsInline.add(secondrowInline);
         inlineKeyboard.setKeyboard(rowsInline);

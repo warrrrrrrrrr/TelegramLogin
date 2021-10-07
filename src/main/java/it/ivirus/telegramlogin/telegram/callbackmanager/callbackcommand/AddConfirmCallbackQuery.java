@@ -20,9 +20,9 @@ public class AddConfirmCallbackQuery extends CallbackCommand {
         Player player = Bukkit.getPlayer(uuid);
         String chatId = args[2];
         playerData.getPlayerWaitingForChatid().remove(uuid);
-        int messageId = update.getMessage().getMessageId();
+        System.out.println(update.getCallbackQuery().getMessage().getMessageId());
+        int messageId = update.getCallbackQuery().getMessage().getMessageId();
         DeleteMessage deleteMessage = new DeleteMessage(chatId, messageId);
-        System.out.println(deleteMessage);
         try {
             bot.execute(deleteMessage);
             if (player == null) {
