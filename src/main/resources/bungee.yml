@@ -1,0 +1,4 @@
+name: BungeeTeamChat
+main: it.ivirus.telegramlogin.bungee.TelegramLoginBungee
+version: 1.0
+author: iVirus
