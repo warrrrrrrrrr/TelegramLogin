@@ -5,6 +5,5 @@ import org.bukkit.command.CommandSender;
 
 public abstract class SubCommand {
     protected final TelegramLogin plugin = TelegramLogin.getInstance();
-
     public abstract boolean onCommand(CommandSender sender, String[] args);
 }
