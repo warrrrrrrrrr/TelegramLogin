@@ -1,54 +1,41 @@
 package it.ivirus.telegramlogin.telegram;
 
+import it.ivirus.telegramlogin.telegram.callbackmanager.ButtonFactory;
 import it.ivirus.telegramlogin.util.LangConstants;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class KeyboardFactory {
-    public static ReplyKeyboard addConfirmButtons(String playerUUID, String idChat) {
+    public static ReplyKeyboard addConfirmButtons(String playerUUID, String chatID) {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        InlineKeyboardButton confirmButton = new InlineKeyboardButton();
-        confirmButton.setText(LangConstants.TG_CONFIRM_BUTTON_TEXT.getString());
-        confirmButton.setCallbackData("/addconfirm " + playerUUID + " " + idChat);
-        rowInline.add(confirmButton);
-        InlineKeyboardButton abortButton = new InlineKeyboardButton();
-        abortButton.setText(LangConstants.TG_ABORT_BUTTON_TEXT.getString());
-        abortButton.setCallbackData("/addabort " + playerUUID + " " + idChat);
-        rowInline.add(abortButton);
-        rowsInline.add(rowInline);
-        inlineKeyboard.setKeyboard(rowsInline);
+
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        buttons.add(Arrays.asList(
+                ButtonFactory.createButton(LangConstants.TG_CONFIRM_BUTTON_TEXT.getString(), "/addconfirm " + playerUUID + " " + chatID),
+                ButtonFactory.createButton(LangConstants.TG_ABORT_BUTTON_TEXT.getString(), "/addabort " + playerUUID + " " + chatID)
+        ));
+
+        inlineKeyboard.setKeyboard(buttons);
         return inlineKeyboard;
     }
 
-    public static ReplyKeyboard loginRequestButtons(String playerUUID, String idChat) {
+    public static ReplyKeyboard loginRequestButtons(String playerUUID, String chatID) {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-        List<InlineKeyboardButton> firstrowInline = new ArrayList<>();
-        List<InlineKeyboardButton> secondrowInline = new ArrayList<>();
 
-        InlineKeyboardButton confirmButton = new InlineKeyboardButton();
-        confirmButton.setText(LangConstants.TG_CONFIRM_BUTTON_TEXT.getString());
-        confirmButton.setCallbackData("/loginconfirm " + playerUUID + " " + idChat);
-        firstrowInline.add(confirmButton);
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        buttons.add(Arrays.asList(
+                ButtonFactory.createButton(LangConstants.TG_CONFIRM_BUTTON_TEXT.getString(), "/loginconfirm " + playerUUID + " " + chatID),
+                ButtonFactory.createButton(LangConstants.TG_ABORT_BUTTON_TEXT.getString(), "/abort " + playerUUID + " " + chatID)
+        ));
+        buttons.add(Collections.singletonList(
+                ButtonFactory.createButton(LangConstants.TG_LOCK_BUTTON_TEXT.getString(), "/lock " + playerUUID + " " + chatID)
+        ));
 
-        InlineKeyboardButton abortButton = new InlineKeyboardButton();
-        abortButton.setText(LangConstants.TG_ABORT_BUTTON_TEXT.getString());
-        abortButton.setCallbackData("/abort " + playerUUID + " " + idChat);
-
-        InlineKeyboardButton lockButton = new InlineKeyboardButton();
-        lockButton.setText(LangConstants.TG_LOCK_BUTTON_TEXT.getString());
-        lockButton.setCallbackData("/lock " + playerUUID + " " + idChat);
-        firstrowInline.add(abortButton);
-        secondrowInline.add(lockButton);
-        rowsInline.add(firstrowInline);
-        rowsInline.add(secondrowInline);
-        inlineKeyboard.setKeyboard(rowsInline);
+        inlineKeyboard.setKeyboard(buttons);
         return inlineKeyboard;
     }
+
 }
