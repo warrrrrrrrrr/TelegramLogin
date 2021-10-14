@@ -42,6 +42,7 @@ info:
   waitForLoginConfirm: "%prefix%&7: Controlla il bot per loggarti."
   operationAborted: "%prefix%&7: Operazione annullata"
   kick_logagain: "%prefix%&7: Rilogga"
+  kick_accountLocked: "%prefix%&7: Account bloccato"
   accountLinked:
     - "&8&m-------------------------------------------"
     - "&bHai collegato con successo il tuo account a telegram!"

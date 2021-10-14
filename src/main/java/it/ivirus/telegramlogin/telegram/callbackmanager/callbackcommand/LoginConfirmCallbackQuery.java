@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.UUID;
 
-public class AddConfirmCallbackQuery extends CallbackCommand {
+public class LoginConfirmCallbackQuery extends CallbackCommand {
     @Override
     public void onUpdateCall(TelegramBot bot, Update update, String[] args) {
         String playerUUID = args[1];
@@ -28,7 +28,7 @@ public class AddConfirmCallbackQuery extends CallbackCommand {
                 bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_PLAYER_OFFLINE.getString()));
                 return;
             }
-            bot.execute((MessageFactory.simpleMessage(chatId, LangConstants.TG_CHATID_CONFIRMED.getString())));
+            bot.execute((MessageFactory.simpleMessage(chatId, LangConstants.TG_LOGIN_EXECUTED.getString())));
             player.sendMessage(LangConstants.ACCOUNT_LINKED.getFormattedString());
         } catch (TelegramApiException e) {
             e.printStackTrace();

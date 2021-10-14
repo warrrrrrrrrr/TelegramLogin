@@ -1,5 +1,6 @@
 package it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand;
 
+import it.ivirus.telegramlogin.telegram.KeyboardFactory;
 import it.ivirus.telegramlogin.telegram.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.telegram.callbackmanager.CallbackCommand;
@@ -12,26 +13,25 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.UUID;
 
-public class AddConfirmCallbackQuery extends CallbackCommand {
+public class LockCallbackQuery extends CallbackCommand {
     @Override
     public void onUpdateCall(TelegramBot bot, Update update, String[] args) {
         String playerUUID = args[1];
         UUID uuid = UUID.fromString(playerUUID);
         Player player = Bukkit.getPlayer(uuid);
         String chatId = args[2];
-        playerData.getPlayerWaitingForChatid().remove(uuid);
         int messageId = update.getCallbackQuery().getMessage().getMessageId();
         DeleteMessage deleteMessage = new DeleteMessage(chatId, messageId);
         try {
             bot.execute(deleteMessage);
-            if (player == null) {
-                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_PLAYER_OFFLINE.getString()));
-                return;
+            plugin.getSql().setLockPlayer(playerUUID, true);
+            if (player != null) {
+                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString()),1);
             }
-            bot.execute((MessageFactory.simpleMessage(chatId, LangConstants.TG_CHATID_CONFIRMED.getString())));
-            player.sendMessage(LangConstants.ACCOUNT_LINKED.getFormattedString());
+            bot.execute(MessageFactory.simpleMessageButtons(chatId, LangConstants.TG_LOCKED_MESSAGE.getString(), KeyboardFactory.unlockButton(playerUUID, chatId)));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
     }
 }

@@ -22,6 +22,18 @@ public class KeyboardFactory {
         return inlineKeyboard;
     }
 
+    public static ReplyKeyboard unlockButton(String playerUUID, String chatID) {
+        InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
+
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        buttons.add(Arrays.asList(
+                ButtonFactory.createButton(LangConstants.TG_UNLOCK_BUTTON_TEXT.getString(), "/unlock " + playerUUID + " " + chatID)
+        ));
+
+        inlineKeyboard.setKeyboard(buttons);
+        return inlineKeyboard;
+    }
+
     public static ReplyKeyboard loginRequestButtons(String playerUUID, String chatID) {
         InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup();
 

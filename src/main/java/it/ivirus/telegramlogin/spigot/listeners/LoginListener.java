@@ -5,6 +5,7 @@ import it.ivirus.telegramlogin.data.PlayerData;
 import it.ivirus.telegramlogin.telegram.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.LangConstants;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,8 +33,12 @@ public class LoginListener implements Listener {
             if (telegramPlayer == null) {
                 if (plugin.getConfig().getBoolean("2FA.enabled")) return;
                 playerData.getPlayerWaitingForChatid().add(player.getUniqueId());
-                player.sendMessage(LangConstants.ADD_CHATID.getFormattedString());
+                player.sendMessage(LangConstants.ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", bot.getBotUsername()));
             } else {
+                if (telegramPlayer.isLocked()){
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString()), 1);
+                    return;
+                }
                 playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
                 try {
                     bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), event.getRealAddress().toString()));

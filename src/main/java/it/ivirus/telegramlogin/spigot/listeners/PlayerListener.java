@@ -2,6 +2,7 @@ package it.ivirus.telegramlogin.spigot.listeners;
 
 import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.data.PlayerData;
+import it.ivirus.telegramlogin.telegram.KeyboardFactory;
 import it.ivirus.telegramlogin.telegram.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.LangConstants;
@@ -54,7 +55,7 @@ public class PlayerListener implements Listener {
                 if (telegramPlayer == null) {
                     plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), chatId, date);
                     try {
-                        bot.execute(MessageFactory.addConfirm(player.getUniqueId().toString(), chatId));
+                        bot.execute(MessageFactory.simpleMessageButtons(chatId, LangConstants.TG_ADD_MESSAGE.getString(), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
                         player.sendMessage(LangConstants.WAIT_FOR_CONFIRM.getFormattedString());
                     } catch (TelegramApiException e) {
                         e.printStackTrace();

@@ -12,6 +12,7 @@ public enum LangConstants {
     TG_LOCKED_MESSAGE("info.telegram.lockedMessage"),
     TG_ABORT_BUTTON_TEXT("info.telegram.abortButton"),
     TG_CONFIRM_BUTTON_TEXT("info.telegram.confirmButton"),
+    TG_LOGIN_EXECUTED("info.telegram.loginExecuted"),
     TG_LOCK_BUTTON_TEXT("info.telegram.lockButton"),
     TG_UNLOCK_BUTTON_TEXT("info.telegram.unlockButton"),
     TG_EXECUTED_MESSAGE("info.telegram.executed"),
@@ -25,6 +26,7 @@ public enum LangConstants {
     INVALID_VALUE("errors.invalidValue"),
     OPERATION_ABORTED("info.operationAborted"),
     KICK_LOG_AGAIN("info.kick_logagain"),
+    KICK_ACCOUNT_LOCKED("info.kick_accountLocked"),
     CHATID_ALREADY_USED("errors.chatIdAlreadyUsed"),
     NOPERMISSION("errors.noPermission");
 

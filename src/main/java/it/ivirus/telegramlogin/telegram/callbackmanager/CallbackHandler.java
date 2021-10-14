@@ -1,9 +1,10 @@
 package it.ivirus.telegramlogin.telegram.callbackmanager;
 
 import it.ivirus.telegramlogin.TelegramLogin;
-import it.ivirus.telegramlogin.telegram.TelegramBot;
-import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AddAbortCallbackQuery;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AbortCallbackQuery;
 import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AddConfirmCallbackQuery;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.LockCallbackQuery;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.LoginConfirmCallbackQuery;
 import lombok.Getter;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -15,7 +16,9 @@ public class CallbackHandler {
 
     private CallbackHandler() {
         registerCommand("/addconfirm", new AddConfirmCallbackQuery());
-        registerCommand("/addabort", new AddAbortCallbackQuery());
+        registerCommand("/abort", new AbortCallbackQuery());
+        registerCommand("/loginconfirm", new LoginConfirmCallbackQuery());
+        registerCommand("/lock", new LockCallbackQuery());
     }
 
     @Getter(lazy = true)
