@@ -1,6 +1,5 @@
-package it.ivirus.telegramlogin.telegram;
+package it.ivirus.telegramlogin.util;
 
-import it.ivirus.telegramlogin.util.LangConstants;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 

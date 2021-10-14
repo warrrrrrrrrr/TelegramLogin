@@ -2,8 +2,8 @@ package it.ivirus.telegramlogin.spigot.listeners;
 
 import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.data.PlayerData;
-import it.ivirus.telegramlogin.telegram.KeyboardFactory;
-import it.ivirus.telegramlogin.telegram.MessageFactory;
+import it.ivirus.telegramlogin.util.KeyboardFactory;
+import it.ivirus.telegramlogin.util.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.LangConstants;
 import org.apache.commons.lang.math.NumberUtils;

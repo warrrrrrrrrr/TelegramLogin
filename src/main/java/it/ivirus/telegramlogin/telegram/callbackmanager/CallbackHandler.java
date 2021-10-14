@@ -24,7 +24,7 @@ public class CallbackHandler {
     @Getter(lazy = true)
     private static final CallbackHandler instance = new CallbackHandler();
 
-    private final Map<String, CallbackCommand> commands = new HashMap<>();
+    private final Map<String, AbstractUpdate> commands = new HashMap<>();
 
     public void run(Update update) {
         String[] args = update.getCallbackQuery().getData().split(" ");
@@ -33,7 +33,7 @@ public class CallbackHandler {
         commands.get(args[0]).onUpdateCall(plugin.getBot(), update, args);
     }
 
-    private void registerCommand(String cmd, CallbackCommand callbackCommand) {
-        commands.put(cmd, callbackCommand);
+    private void registerCommand(String cmd, AbstractUpdate abstractUpdate) {
+        commands.put(cmd, abstractUpdate);
     }
 }

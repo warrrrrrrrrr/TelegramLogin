@@ -1,19 +1,18 @@
 package it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand;
 
-import it.ivirus.telegramlogin.telegram.MessageFactory;
+import it.ivirus.telegramlogin.util.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
-import it.ivirus.telegramlogin.telegram.callbackmanager.CallbackCommand;
+import it.ivirus.telegramlogin.telegram.callbackmanager.AbstractUpdate;
 import it.ivirus.telegramlogin.util.LangConstants;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.UUID;
 
-public class AbortCallbackQuery extends CallbackCommand {
+public class AbortCallbackQuery extends AbstractUpdate {
     @Override
     public void onUpdateCall(TelegramBot bot, Update update, String[] args) {
         String playerUUID = args[1];
