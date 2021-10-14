@@ -1,4 +1,4 @@
-package it.ivirus.telegramlogin.telegram.callbackmanager;
+package it.ivirus.telegramlogin.telegram;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 

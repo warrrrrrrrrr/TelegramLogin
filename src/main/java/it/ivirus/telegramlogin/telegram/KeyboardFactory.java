@@ -1,6 +1,5 @@
 package it.ivirus.telegramlogin.telegram;
 
-import it.ivirus.telegramlogin.telegram.callbackmanager.ButtonFactory;
 import it.ivirus.telegramlogin.util.LangConstants;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
