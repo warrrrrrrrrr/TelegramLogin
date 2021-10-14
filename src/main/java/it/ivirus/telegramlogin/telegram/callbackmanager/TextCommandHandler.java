@@ -1,26 +1,29 @@
 package it.ivirus.telegramlogin.telegram.callbackmanager;
 
 import it.ivirus.telegramlogin.TelegramLogin;
-import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.*;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AbortCallbackQuery;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AddConfirmCallbackQuery;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.LockCallbackQuery;
+import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.LoginConfirmCallbackQuery;
 import lombok.Getter;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CallbackHandler {
+public class TextCommandHandler {
     private final TelegramLogin plugin = TelegramLogin.getInstance();
 
-    private CallbackHandler() {
-        registerCommand("/addconfirm", new AddConfirmCallbackQuery());
-        registerCommand("/abort", new AbortCallbackQuery());
-        registerCommand("/loginconfirm", new LoginConfirmCallbackQuery());
+    private TextCommandHandler() {
+        registerCommand("/help", new AddConfirmCallbackQuery());
+        registerCommand("/start", new AbortCallbackQuery());
+        registerCommand("/chatid", new LoginConfirmCallbackQuery());
         registerCommand("/lock", new LockCallbackQuery());
-        registerCommand("/unlock", new UnlockCallbackQuery());
+        registerCommand("/unlock", new LockCallbackQuery());
     }
 
     @Getter(lazy = true)
-    private static final CallbackHandler instance = new CallbackHandler();
+    private static final TextCommandHandler instance = new TextCommandHandler();
 
     private final Map<String, AbstractUpdate> commands = new HashMap<>();
 

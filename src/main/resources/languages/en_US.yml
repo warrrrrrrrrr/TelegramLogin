@@ -19,6 +19,7 @@ info:
     lockedMessage:
       - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
       - "Premi 'Sblocca' prima di entrare."
+    unlockedMessage: "\U0001f513 TelegramLogin - Sbloccato!"
     chatIdConfirmed:
       - "\u2757\uFE0F TelegramLogin - ChatId confermato!"
       - "\uD83D\uDFE2 Login eseguito"
@@ -26,6 +27,16 @@ info:
     loginExecuted:
       - "\u2757\uFE0F TelegramLogin - Login eseguito!"
       - "Puoi tornare in gioco"
+    helpMessage:
+      - "\u27AA /help - per visualizzare questo messaggio"
+      - "\u27AA /chatid - per ottenere il tuo chatId"
+      - "\u27AA /unlock - per sbloccare il tuo account"
+      - "\u27AA /lock - per bloccare il tuo account"
+    startMessage:
+      - "\u27AA /help - per visualizzare questo messaggio"
+      - "\u27AA /chatid - per ottenere il tuo chatId"
+      - "\u27AA /unlock - per sbloccare il tuo account"
+      - "\u27AA /lock - per bloccare il tuo account"
     abortButton: "\u274C Annulla"
     confirmButton: "\uD83D\uDFE2 Conferma"
     lockButton: "\u26D4\uFE0F Blocca"

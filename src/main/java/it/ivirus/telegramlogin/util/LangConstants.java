@@ -10,6 +10,7 @@ public enum LangConstants {
     TG_ADD_MESSAGE("info.telegram.addMessage"),
     TG_LOGIN_MESSAGE("info.telegram.loginMessage"),
     TG_LOCKED_MESSAGE("info.telegram.lockedMessage"),
+    TG_UNLOCKED_MESSAGE("info.telegram.unlockedMessage"),
     TG_ABORT_BUTTON_TEXT("info.telegram.abortButton"),
     TG_CONFIRM_BUTTON_TEXT("info.telegram.confirmButton"),
     TG_LOGIN_EXECUTED("info.telegram.loginExecuted"),

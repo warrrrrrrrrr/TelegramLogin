@@ -55,7 +55,7 @@ public class PlayerListener implements Listener {
                 if (telegramPlayer == null) {
                     plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), chatId, date);
                     try {
-                        bot.execute(MessageFactory.simpleMessageButtons(chatId, LangConstants.TG_ADD_MESSAGE.getString(), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
+                        bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ADD_MESSAGE.getString(), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
                         player.sendMessage(LangConstants.WAIT_FOR_CONFIRM.getFormattedString());
                     } catch (TelegramApiException e) {
                         e.printStackTrace();

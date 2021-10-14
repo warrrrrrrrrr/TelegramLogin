@@ -12,7 +12,7 @@ public class MessageFactory {
         return sendMessage;
     }
 
-    public static SendMessage simpleMessageButtons(String chatId, String text, ReplyKeyboard buttons) {
+    public static SendMessage simpleMessage(String chatId, String text, ReplyKeyboard buttons) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(text);
