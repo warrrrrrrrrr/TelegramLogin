@@ -101,6 +101,16 @@ public abstract class SqlManager {
         }
     }
 
+    public void setLockPlayerByChatId(String chatid, boolean value) {
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE " + TABLE_PLAYERS + " SET Locked=? WHERE ChatId=?")) {
+            statement.setBoolean(1, value);
+            statement.setString(2, chatid);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void setConnection(Connection connection) {
         this.connection = connection;
     }

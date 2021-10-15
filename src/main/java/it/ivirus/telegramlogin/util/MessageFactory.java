@@ -20,6 +20,13 @@ public class MessageFactory {
         return sendMessage;
     }
 
+    public static SendMessage chatidMessage(String chatId) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(LangConstants.TG_CHATID_MESSAGE.getString().replaceAll("%chatId%", chatId));
+        return sendMessage;
+    }
+
     public static SendMessage loginRequest(String playerUUID, String chatId, String ipAddress) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);

@@ -4,6 +4,7 @@ import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.spigot.listeners.LoginListener;
 import it.ivirus.telegramlogin.spigot.listeners.PlayerListener;
 import it.ivirus.telegramlogin.telegram.callbackmanager.CallbackHandler;
+import it.ivirus.telegramlogin.telegram.callbackmanager.TextCommandHandler;
 import org.bukkit.Bukkit;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -11,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class TelegramBot extends TelegramLongPollingBot {
     private final TelegramLogin plugin;
     private final CallbackHandler callbackHandler = CallbackHandler.getInstance();
+    private final TextCommandHandler textCommandHandler = TextCommandHandler.getInstance();
 
     public TelegramBot(TelegramLogin plugin) {
         this.plugin = plugin;
@@ -21,7 +23,9 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasCallbackQuery()) callbackHandler.run(update);
+        if (update.hasCallbackQuery()) {
+            callbackHandler.run(update);
+        } else textCommandHandler.run(update);
     }
 
     @Override

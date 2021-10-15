@@ -5,6 +5,7 @@ errors:
   invalidValue: "&cValore non valido"
   telegram:
     playerOffline: "\u2757\uFE0F Sei offline! Entra nel server \u2757\uFE0F"
+    chatIdNotLinked: "Questo chatId non è collegato ad alcun account minecraft"
 
 info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
@@ -19,6 +20,10 @@ info:
     lockedMessage:
       - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
       - "Premi 'Sblocca' prima di entrare."
+    lockedMessageByCommand:
+      - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
+      - "Hai bloccato l'account minecraft associato al tuo chatid"
+      - "Digita /unlock per sbloccarlo"
     unlockedMessage: "\U0001f513 TelegramLogin - Sbloccato!"
     chatIdConfirmed:
       - "\u2757\uFE0F TelegramLogin - ChatId confermato!"
@@ -32,7 +37,11 @@ info:
       - "\u27AA /chatid - per ottenere il tuo chatId"
       - "\u27AA /unlock - per sbloccare il tuo account"
       - "\u27AA /lock - per bloccare il tuo account"
+    chatIdMessage: "\U0001f4cb Il tuo chatId è: %chatId%"
     startMessage:
+      - "Hai avviato il bot con successo!"
+      - "Di seguito trovi i comandi che puoi eseguire:"
+      - ""
       - "\u27AA /help - per visualizzare questo messaggio"
       - "\u27AA /chatid - per ottenere il tuo chatId"
       - "\u27AA /unlock - per sbloccare il tuo account"
