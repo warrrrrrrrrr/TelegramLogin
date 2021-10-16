@@ -2,18 +2,20 @@ package it.ivirus.telegramlogin.spigot.listeners;
 
 import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.data.PlayerData;
-import it.ivirus.telegramlogin.util.KeyboardFactory;
-import it.ivirus.telegramlogin.util.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
+import it.ivirus.telegramlogin.util.KeyboardFactory;
 import it.ivirus.telegramlogin.util.LangConstants;
+import it.ivirus.telegramlogin.util.MessageFactory;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.player.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.sql.Date;
@@ -62,7 +64,6 @@ public class PlayerListener implements Listener {
                     }
                 } else {
                     player.sendMessage(LangConstants.CHATID_ALREADY_USED.getFormattedString());
-                    return;
                 }
             });
         }
@@ -84,6 +85,52 @@ public class PlayerListener implements Listener {
                 z += .5;
                 event.getPlayer().teleport(new Location(from.getWorld(), x, from.getY(), z, from.getYaw(), from.getPitch()));
             }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDropItem(PlayerDropItemEvent event) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerPickItem(EntityPickupItemEvent event) {
+        if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerPickUpArrow(PlayerPickupArrowEvent event) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerItemDamage(PlayerItemDamageEvent event) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerTakeDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
+            event.setCancelled(true);
         }
     }
 }

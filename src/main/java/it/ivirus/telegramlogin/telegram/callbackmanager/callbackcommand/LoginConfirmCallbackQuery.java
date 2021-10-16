@@ -19,7 +19,7 @@ public class LoginConfirmCallbackQuery extends AbstractUpdate {
         UUID uuid = UUID.fromString(playerUUID);
         Player player = Bukkit.getPlayer(uuid);
         String chatId = args[2];
-        playerData.getPlayerWaitingForChatid().remove(uuid);
+        playerData.getPlayerInLogin().remove(uuid);
         int messageId = update.getCallbackQuery().getMessage().getMessageId();
         DeleteMessage deleteMessage = new DeleteMessage(chatId, messageId);
         try {
