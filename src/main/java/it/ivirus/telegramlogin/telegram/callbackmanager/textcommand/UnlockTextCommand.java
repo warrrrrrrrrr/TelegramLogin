@@ -7,6 +7,8 @@ import it.ivirus.telegramlogin.util.MessageFactory;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.UUID;
+
 public class UnlockTextCommand extends AbstractUpdate {
     @Override
     public void onUpdateCall(TelegramBot bot, Update update, String[] args) {
@@ -20,6 +22,9 @@ public class UnlockTextCommand extends AbstractUpdate {
                     bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_CHATID_NOT_LINKED.getString()));
                 } else {
                     plugin.getSql().setLockPlayerByChatId(chatId, false);
+                    if (playerData.getPlayerCache().containsKey(UUID.fromString(telegramPlayer.getPlayerUUID()))){
+                        playerData.getPlayerCache().get(UUID.fromString(telegramPlayer.getPlayerUUID())).setLocked(false);
+                    }
                     bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_UNLOCKED_MESSAGE.getString()));
                 }
             } catch (TelegramApiException e) {

@@ -25,6 +25,9 @@ public class LockCallbackQuery extends AbstractUpdate {
         try {
             bot.execute(deleteMessage);
             plugin.getSql().setLockPlayer(playerUUID, true);
+            if (playerData.getPlayerCache().containsKey(UUID.fromString(playerUUID))){
+                playerData.getPlayerCache().get(UUID.fromString(playerUUID)).setLocked(true);
+            }
             if (player != null) {
                 Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString()),1);
             }

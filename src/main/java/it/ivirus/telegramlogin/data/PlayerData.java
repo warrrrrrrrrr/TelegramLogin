@@ -13,6 +13,7 @@ public class PlayerData {
     private final Map<UUID, TelegramPlayer> playerInLogin = new HashMap<>();
     private final Set<UUID> playerWaitingForChatid = new HashSet<>();
     private final Set<UUID> bungeePendingPlayers = new HashSet<>();
+    private final Map<UUID, TelegramPlayer> playerCache = new HashMap<>();
 
     @Getter(lazy = true)
     private static final PlayerData instance = new PlayerData();
