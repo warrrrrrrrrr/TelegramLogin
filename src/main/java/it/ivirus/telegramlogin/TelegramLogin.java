@@ -34,15 +34,12 @@ public class TelegramLogin extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        getLogger().info("Creating files...");
         saveDefaultConfig();
         this.createLangFile("en_US", "it_IT");
-        getLogger().info("Loading language...");
         this.loadLangConfig();
-        getLogger().info("Started database setup...");
         this.setupDb();
-        getLogger().info("Starting bot...");
-        startBot();
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
+        this.startBot();
         getLogger().info("Plugin is ready!");
     }
 

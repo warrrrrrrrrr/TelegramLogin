@@ -12,26 +12,21 @@ import java.util.UUID;
 
 public class PlayerListener implements Listener {
 
-    public PlayerListener() {
-        TelegramLoginBungee.getInstance().getProxy().getPluginManager().registerListener(TelegramLoginBungee.getInstance(), this);
-    }
-
-    @EventHandler
+    /*@EventHandler
     public void onLogin(PostLoginEvent event) {
         UUID playerUUID = event.getPlayer().getUniqueId();
 
-        if (TelegramLoginBungee.getInstance().getConfiguration().getBoolean("bungee"))
+        if (TelegramLoginBungee.getInstance().getConfig().getBoolean("bungee"))
             PlayerData.getInstance().getBungeePendingPlayers().add(playerUUID);
-    }
+    }*/
 
     @EventHandler
     public void onCommand(ChatEvent event) {
         if (!(event.getSender() instanceof ProxiedPlayer)) return;
         ProxiedPlayer player = (ProxiedPlayer) event.getSender();
 
-        if (event.isProxyCommand() && TelegramLoginBungee.getInstance().getConfiguration().getBoolean("bungee")) {
+        if (event.isProxyCommand() && TelegramLoginBungee.getInstance().getConfig().getBoolean("bungee")) {
             if (PlayerData.getInstance().getBungeePendingPlayers().contains(player.getUniqueId())) {
-                // TODO
                 event.setCancelled(true);
             }
         }

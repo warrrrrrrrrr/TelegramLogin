@@ -8,26 +8,36 @@ import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
+import java.util.Locale;
 import java.util.UUID;
 
 public class MessageListener implements Listener {
 
     public MessageListener() {
-        TelegramLoginBungee.getInstance().getProxy().registerChannel("{channel-name}");
-        TelegramLoginBungee.getInstance().getProxy().getPluginManager().registerListener(TelegramLoginBungee.getInstance(), this);
+        TelegramLoginBungee.getInstance().getProxy().registerChannel("hxj:telegramlogin");
     }
 
-    @EventHandler @SuppressWarnings("UnstableApiUsage")
+    @EventHandler
+    @SuppressWarnings("UnstableApiUsage")
     public void onMessageReceived(PluginMessageEvent event) {
+        if (!TelegramLoginBungee.getInstance().getConfig().getBoolean("bungee")) return;
         ByteArrayDataInput input = ByteStreams.newDataInput(event.getData());
-
-        String subChannel = input.readUTF();
-        if (!subChannel.equals("{sub-channel-name")) return;
-
+        String subChannel = input.readLine();
+        if (!subChannel.equals("cache")) return;
+        String action = input.readUTF();
         UUID playerUUID = UUID.fromString(input.readUTF());
-
-        if (TelegramLoginBungee.getInstance().getConfiguration().getBoolean("bungee"))
-            PlayerData.getInstance().getBungeePendingPlayers().remove(playerUUID);
+        switch (action.toLowerCase()) {
+            case "add": {
+                PlayerData.getInstance().getBungeePendingPlayers().add(playerUUID);
+                break;
+            }
+            case "remove": {
+                PlayerData.getInstance().getBungeePendingPlayers().remove(playerUUID);
+                break;
+            }
+            default:
+                return;
+        }
     }
 
 }

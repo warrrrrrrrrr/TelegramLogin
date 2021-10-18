@@ -4,6 +4,8 @@ import it.ivirus.telegramlogin.util.MessageFactory;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.telegram.callbackmanager.AbstractUpdate;
 import it.ivirus.telegramlogin.util.LangConstants;
+import it.ivirus.telegramlogin.util.PluginMessageAction;
+import it.ivirus.telegramlogin.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
@@ -28,8 +30,9 @@ public class LoginConfirmCallbackQuery extends AbstractUpdate {
                 bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_PLAYER_OFFLINE.getString()));
                 return;
             }
+            Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
             bot.execute((MessageFactory.simpleMessage(chatId, LangConstants.TG_LOGIN_EXECUTED.getString())));
-            player.sendMessage(LangConstants.ACCOUNT_LINKED.getFormattedString());
+            player.sendMessage(LangConstants.LOGIN_EXECUTED.getFormattedString());
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

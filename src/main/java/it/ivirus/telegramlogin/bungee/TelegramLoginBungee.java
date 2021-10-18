@@ -4,29 +4,26 @@ import com.google.common.io.ByteStreams;
 import it.ivirus.telegramlogin.bungee.listener.MessageListener;
 import it.ivirus.telegramlogin.bungee.listener.PlayerListener;
 import lombok.Getter;
+import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 @Getter
 public class TelegramLoginBungee extends Plugin {
     @Getter private static TelegramLoginBungee instance;
 
     private File fileConfig;
-    private Configuration configuration;
+    private Configuration config;
 
     @Override
     public void onEnable() {
         instance = this;
-
-        new PlayerListener();
-        new MessageListener();
+        this.createConfig();
+        this.loadListeners(new PlayerListener(), new MessageListener());
     }
 
     @Override
@@ -34,6 +31,7 @@ public class TelegramLoginBungee extends Plugin {
         //
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     private void createConfig() {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
@@ -52,9 +50,15 @@ public class TelegramLoginBungee extends Plugin {
             }
         }
         try {
-            configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFileConfig());
+            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFileConfig());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void loadListeners(Listener... listeners){
+        for (Listener l : listeners){
+            this.getProxy().getPluginManager().registerListener(this, l);
         }
     }
 

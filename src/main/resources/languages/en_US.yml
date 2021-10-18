@@ -66,6 +66,7 @@ info:
   operationAborted: "%prefix%&7: Operazione annullata"
   kick_logagain: "%prefix%&7: Rilogga"
   kick_accountLocked: "%prefix%&7: Account bloccato"
+  loginExecuted: "%prefix%&7: &bLogin eseguito con successo."
   accountLinked:
     - "&8&m-------------------------------------------"
     - "&bHai collegato con successo il tuo account a telegram!"

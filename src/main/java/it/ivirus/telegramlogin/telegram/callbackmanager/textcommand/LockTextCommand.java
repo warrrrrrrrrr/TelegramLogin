@@ -4,6 +4,8 @@ import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.telegram.callbackmanager.AbstractUpdate;
 import it.ivirus.telegramlogin.util.LangConstants;
 import it.ivirus.telegramlogin.util.MessageFactory;
+import it.ivirus.telegramlogin.util.PluginMessageAction;
+import it.ivirus.telegramlogin.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -29,8 +31,13 @@ public class LockTextCommand extends AbstractUpdate {
                     }
                     Bukkit.getScheduler().runTaskLater(plugin, () -> {
                         Player player = Bukkit.getPlayer(UUID.fromString(telegramPlayer.getPlayerUUID()));
-                        if (player != null)
-                            player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString());
+                        if (player != null){
+                            if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())){
+                                playerData.getPlayerInLogin().remove(player.getUniqueId());
+                                Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
+                                player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString());
+                            }
+                        }
                     },1);
                     bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_LOCKED_MESSAGE_BY_COMMAND.getString()));
                 }

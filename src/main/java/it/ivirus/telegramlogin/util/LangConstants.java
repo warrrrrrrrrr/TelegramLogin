@@ -34,6 +34,7 @@ public enum LangConstants {
     KICK_LOG_AGAIN("info.kick_logagain"),
     KICK_ACCOUNT_LOCKED("info.kick_accountLocked"),
     CHATID_ALREADY_USED("errors.chatIdAlreadyUsed"),
+    LOGIN_EXECUTED("info.loginExecuted"),
     NOPERMISSION("errors.noPermission");
 
 
