@@ -17,11 +17,8 @@ bungee: false   #Enable if you are running inside a network (remember, place thi
 #                       Bot Config                                      #
 #########################################################################
 bot:
-  name: "@TelegramLogin_bot"
-  token: "875694660:AAF3oBELJKgb5LeqlQ-jA41I2GGtQtOxepk"
-  allowedCommands:
-    - "/login"
-    - "/register"
+  name: "@YourBotName"
+  token: "YourToken"    #recover it from @BotFather
 
 #########################################################################
 #                          2FA Section                                  #

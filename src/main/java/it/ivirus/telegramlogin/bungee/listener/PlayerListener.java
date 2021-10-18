@@ -14,7 +14,6 @@ public class PlayerListener implements Listener {
         ProxiedPlayer player = (ProxiedPlayer) event.getSender();
 
         if (event.isProxyCommand() || event.isCommand()) {
-            System.out.println(PlayerData.getInstance().getBungeePendingPlayers());
             if (PlayerData.getInstance().getBungeePendingPlayers().contains(player.getUniqueId())) {
                 event.setCancelled(true);
             }

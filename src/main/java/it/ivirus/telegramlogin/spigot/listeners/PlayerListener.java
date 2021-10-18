@@ -31,8 +31,12 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerInsertChatID(AsyncPlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())) {
+            event.setCancelled(true);
+            return;
+        }
         if (playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
             event.setCancelled(true);
             String chatId = event.getMessage();

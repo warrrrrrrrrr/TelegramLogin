@@ -5,24 +5,47 @@ errors:
   invalidValue: "&cValore non valido"
   telegram:
     playerOffline: "\u2757\uFE0F Sei offline! Entra nel server \u2757\uFE0F"
+    chatIdNotLinked: "Questo chatId non è collegato ad alcun account minecraft"
 
 info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
     addMessage:
-    - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
-    - "Conferma setup"
-    - "(Seleziona cosa vuoi fare)"
+      - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
+      - "Conferma setup"
+      - "(Seleziona cosa vuoi fare)"
     loginMessage:
-    - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
-    - "\uD83C\uDF10 \u00BB %player_ip%"
-    - "(Seleziona cosa vuoi fare)"
+      - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
+      - "\uD83C\uDF10 \u00BB %player_ip%"
+      - "(Seleziona cosa vuoi fare)"
     lockedMessage:
-    - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
-    - "Premi 'Sblocca' prima di entrare."
+      - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
+      - "Premi 'Sblocca' prima di entrare."
+    lockedMessageByCommand:
+      - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
+      - "Hai bloccato l'account minecraft associato al tuo chatid"
+      - "Digita /unlock per sbloccarlo"
+    unlockedMessage: "\U0001f513 TelegramLogin - Sbloccato!"
     chatIdConfirmed:
-    - "\u2757\uFE0F TelegramLogin - ChatId confermato!"
-    - "\uD83D\uDFE2 Login eseguito"
-    - "Puoi tornare in gioco"
+      - "\u2757\uFE0F TelegramLogin - ChatId confermato!"
+      - "\uD83D\uDFE2 Login eseguito"
+      - "Puoi tornare in gioco"
+    loginExecuted:
+      - "\u2757\uFE0F TelegramLogin - Login eseguito!"
+      - "Puoi tornare in gioco"
+    helpMessage:
+      - "\u27AA /help - per visualizzare questo messaggio"
+      - "\u27AA /chatid - per ottenere il tuo chatId"
+      - "\u27AA /unlock - per sbloccare il tuo account"
+      - "\u27AA /lock - per bloccare il tuo account"
+    chatIdMessage: "\U0001f4cb Il tuo chatId è: %chatId%"
+    startMessage:
+      - "Hai avviato il bot con successo!"
+      - "Di seguito trovi i comandi che puoi eseguire:"
+      - ""
+      - "\u27AA /help - per visualizzare questo messaggio"
+      - "\u27AA /chatid - per ottenere il tuo chatId"
+      - "\u27AA /unlock - per sbloccare il tuo account"
+      - "\u27AA /lock - per bloccare il tuo account"
     abortButton: "\u274C Annulla"
     confirmButton: "\uD83D\uDFE2 Conferma"
     lockButton: "\u26D4\uFE0F Blocca"
@@ -32,17 +55,17 @@ info:
     #------------------------------------------------------------------------------------------------
   addChatId:
     - "&8&m-------------------------------------------"
-    - "&7Scrivi in chat il tuo chatId di Telegram"
-    - "&7Lo puoi recuperare utilizzando"
-    - "&7utilizzando il seguente bot: &b@chatid_echo_bot"
     - "&cAssicurati di aver avviato prima"
-    - "&cil nostro bot: &b%bot_tag%"
+    - "&cil nostro bot: &b%bot_tag%&7."
+    - "&7Scrivi in chat il tuo chatId di Telegram"
+    - "&7Lo puoi recuperare utilizzando il nostro bot"
     - "&8&m-------------------------------------------"
   waitForConfirm: "%prefix%&7: Controlla il bot per confermare il tuo chatId e quindi loggarti."
   waitForLoginConfirm: "%prefix%&7: Controlla il bot per loggarti."
   operationAborted: "%prefix%&7: Operazione annullata"
   kick_logagain: "%prefix%&7: Rilogga"
   kick_accountLocked: "%prefix%&7: Account bloccato"
+  loginExecuted: "%prefix%&7: &bLogin eseguito con successo."
   accountLinked:
     - "&8&m-------------------------------------------"
     - "&bHai collegato con successo il tuo account a telegram!"

@@ -55,11 +55,10 @@ info:
     #------------------------------------------------------------------------------------------------
   addChatId:
     - "&8&m-------------------------------------------"
-    - "&7Scrivi in chat il tuo chatId di Telegram"
-    - "&7Lo puoi recuperare utilizzando"
-    - "&7utilizzando il seguente bot: &b@chatid_echo_bot"
     - "&cAssicurati di aver avviato prima"
-    - "&cil nostro bot: &b%bot_tag%"
+    - "&cil nostro bot: &b%bot_tag%&7."
+    - "&7Scrivi in chat il tuo chatId di Telegram"
+    - "&7Lo puoi recuperare utilizzando il nostro bot"
     - "&8&m-------------------------------------------"
   waitForConfirm: "%prefix%&7: Controlla il bot per confermare il tuo chatId e quindi loggarti."
   waitForLoginConfirm: "%prefix%&7: Controlla il bot per loggarti."
