@@ -63,7 +63,7 @@ info:
   waitForConfirm: "%prefix%&7: Check the bot to confirm your chatId and then log in."
   waitForLoginConfirm: "%prefix%&7: Check the bot to log in."
   operationAborted: "%prefix%&7: Operation canceled"
-  kick_logagain: "%prefix%&7: Relocate"
+  kick_logagain: "%prefix%&7: Log in again."
   kick_accountLocked: "%prefix%&7: Account blocked"
   loginExecuted: "%prefix%&7: &bLogin successful."
   accountLinked:
