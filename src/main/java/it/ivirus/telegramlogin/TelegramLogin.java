@@ -5,6 +5,7 @@ import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
 import it.ivirus.telegramlogin.spigot.listeners.PlayerListener;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
+import it.ivirus.telegramlogin.util.Secure;
 import it.ivirus.telegramlogin.util.Util;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -37,6 +38,13 @@ public class TelegramLogin extends JavaPlugin {
         saveDefaultConfig();
         this.createLangFile("en_US", "it_IT");
         this.loadLangConfig();
+
+        if(!new Secure(this, getConfig().getString("license"), "http://hoxija.it:8080/api/client", "qWrpfnSRhBgYCjhtUdymzu3pY7YpNcPuXruG5C7D").verify()) {
+            Bukkit.getPluginManager().disablePlugin(this);
+            Bukkit.getScheduler().cancelTasks(this);
+            return;
+        }
+
         this.setupDb();
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         this.startBot();
