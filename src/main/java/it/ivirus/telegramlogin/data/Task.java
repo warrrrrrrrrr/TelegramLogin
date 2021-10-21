@@ -13,7 +13,7 @@ public class Task {
     private final TelegramLogin plugin;
 
     public void startClearCacheTask(){
-        long l = 20 * 60 * 20;
+        long l = 20 * 60 * 20;  //20 minutes
         Bukkit.getScheduler().scheduleAsyncRepeatingTask(plugin, new BukkitRunnable() {
             @Override
             public void run() {
