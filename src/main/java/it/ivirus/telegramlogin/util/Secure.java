@@ -19,7 +19,6 @@ import java.util.Base64;
 import java.util.Enumeration;
 import java.util.Scanner;
 
-
 public class Secure {
     private final TelegramLogin plugin;
     private final String productKey;
@@ -37,7 +36,6 @@ public class Secure {
     }
 
     public boolean verify() {
-        System.out.println("--------------------> Login <--------------------");
         System.out.println(" |- Verifying your license...");
         System.out.println(" ");
         String[] respo = isValid();
@@ -90,11 +88,11 @@ public class Secure {
         con.connect();
 
 
-        try (OutputStream os = con.getOutputStream()) {
+        try(OutputStream os = con.getOutputStream()) {
             os.write(out);
         }
 
-        if (!url.getHost().equals(con.getURL().getHost())) return "successful_authentication";
+        if(!url.getHost().equals(con.getURL().getHost())) return "successful_authentication";
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
             String inputLine;
@@ -132,11 +130,11 @@ public class Secure {
         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         con.connect();
 
-        try (OutputStream os = con.getOutputStream()) {
+        try(OutputStream os = con.getOutputStream()) {
             os.write(out);
         }
 
-        if (!url.getHost().equals(con.getURL().getHost())) return "successful_authentication";
+        if(!url.getHost().equals(con.getURL().getHost())) return "successful_authentication";
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
             String inputLine;
@@ -153,13 +151,13 @@ public class Secure {
     public String[] isValid() {
         try {
             String response;
-            if (server.contains("http")) {
+            if(server.contains("http")) {
                 response = requestServer(productKey);
             } else {
                 response = requestServerHTTPS(productKey);
             }
 
-            if (!response.contains("{")) {
+            if(!response.contains("{")) {
                 return new String[]{"1", "ODD_RESULT", "420"};
             }
 
@@ -175,19 +173,19 @@ public class Secure {
 
             String statusCode = json.get("status_code").toString();
 
-            if (status.contains("success")) {
+            if(status.contains("success")) {
                 hash = json.get("status_id").toString();
                 version = json.get("version").toString();
             }
 
-            if (hash != null && version != null) {
+            if(hash != null && version != null) {
                 String[] aa = hash.split("694201337");
 
                 String hashed = aa[0];
 
                 String decoded = new String(Base64.getDecoder().decode(hashed));
 
-                if (!decoded.equals(productKey.substring(0, 2) + productKey.substring(productKey.length() - 2) + authorization.substring(0, 2))) {
+                if(!decoded.equals(productKey.substring(0, 2) + productKey.substring(productKey.length() - 2) + authorization.substring(0, 2))) {
                     return new String[]{"1", "FAILED_AUTHENTICATION", statusCode, String.valueOf(false)};
                 }
 
@@ -197,14 +195,14 @@ public class Secure {
                 long t = Long.parseLong(unix);
                 long hashT = Long.parseLong(aa[1]);
 
-                if (Math.abs(t - hashT) > 1) {
+                if(Math.abs(t - hashT) > 1) {
                     return new String[]{"1", "FAILED_AUTHENTICATION", statusCode, String.valueOf(false)};
                 }
             }
 
             int statusLength = status.length();
 
-            if (version != null && !version.equals(plugin.getDescription().getVersion())
+            if(version != null && !version.equals(plugin.getDescription().getVersion())
                     && status.contains("success") && response.contains("success")
                     && String.valueOf(statusLength).equals("7")) {
                 return new String[]{"3", "OUTDATED_VERSION#" + version, statusCode, String.valueOf(true)};
@@ -212,7 +210,7 @@ public class Secure {
 
             statusLength = status.length();
 
-            if (!isValidLength(statusLength)) {
+            if(!isValidLength(statusLength)) {
                 return new String[]{"1", neekeri, statusCode, String.valueOf(false)};
             }
 
@@ -220,7 +218,7 @@ public class Secure {
 
             return new String[]{valid ? "2" : "1", neekeri, statusCode, String.valueOf(valid)};
         } catch (IOException | ParseException ex) {
-            if (ex.getMessage().contains("429")) {
+            if(ex.getMessage().contains("429")) {
                 return new String[]{"1", "ERROR", "You are being rate limited because of sending too many requests", String.valueOf(false)};
             }
             ex.printStackTrace();
