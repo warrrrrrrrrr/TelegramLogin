@@ -19,16 +19,6 @@ import java.util.Base64;
 import java.util.Enumeration;
 import java.util.Scanner;
 
-//USE HTTPS IF U HAVE SSL ENABLED!
-
-//Basic for Main class
-/*
-        if(!new ULicense(this, "GET_LICENSE_FROM_CONFIG_HERE", "http://IP_ADDRESS/api/client", "API_KEY").verify()) {
-            Bukkit.getPluginManager().disablePlugin(this);
-            Bukkit.getScheduler().cancelTasks(this);
-            return;
-        }
-*/
 
 public class Secure {
     private final TelegramLogin plugin;
@@ -53,7 +43,6 @@ public class Secure {
         String[] respo = isValid();
         if (respo[0].equals("2") && Boolean.parseBoolean(respo[3])) {
             System.out.println(" |- Your license is valid.");
-            System.out.println(" |- Code: " + respo[2]);
             System.out.println("-------------------------------------------------");
             return Boolean.parseBoolean(respo[3]);
         } else if (respo[0].equals("3") && Boolean.parseBoolean(respo[3]) && Boolean.parseBoolean(respo[3])) {
@@ -61,7 +50,6 @@ public class Secure {
             System.out.println(" ");
             System.out.println(" |- Your version: " + plugin.getDescription().getVersion());
             System.out.println(" |- Latest version: " + respo[1].split("#")[1]);
-            System.out.println(" |- Code: " + respo[2]);
             System.out.println("-------------------------------------------------");
             return Boolean.parseBoolean(respo[3]);
         } else {

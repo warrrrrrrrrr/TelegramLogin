@@ -39,7 +39,7 @@ public class TelegramLogin extends JavaPlugin {
         this.createLangFile("en_US", "it_IT");
         this.loadLangConfig();
 
-        if(!new Secure(this, getConfig().getString("license"), "http://hoxija.it:8080/api/client", "qWrpfnSRhBgYCjhtUdymzu3pY7YpNcPuXruG5C7D").verify()) {
+        if(!new Secure(this, getConfig().getString("license"), "http://hoxija.it:8080/api/client", "6bafe710273471ab74290a5deca50c52423b5964").verify()) {
             Bukkit.getPluginManager().disablePlugin(this);
             Bukkit.getScheduler().cancelTasks(this);
             return;

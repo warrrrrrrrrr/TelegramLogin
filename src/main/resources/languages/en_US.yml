@@ -28,10 +28,10 @@ info:
     chatIdConfirmed:
       - "\u2757\uFE0F TelegramLogin - ChatId confirmed!"
       - "\uD83D\uDFE2 Login successful"
-      - "You can get back into the game"
+      - "You can back into the game"
     loginExecuted:
       - "\u2757\uFE0F TelegramLogin - Login successful!"
-      - "You can get back into the game"
+      - "You can back into the game"
     helpMessage:
       - "\u27AA /help - to view this message"
       - "\u27AA /chatid - to get your chatId"
