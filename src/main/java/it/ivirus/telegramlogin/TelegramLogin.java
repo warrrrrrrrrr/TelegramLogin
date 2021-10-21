@@ -1,5 +1,6 @@
 package it.ivirus.telegramlogin;
 
+import it.ivirus.telegramlogin.data.Task;
 import it.ivirus.telegramlogin.database.SQLite;
 import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
@@ -48,6 +49,7 @@ public class TelegramLogin extends JavaPlugin {
         this.setupDb();
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         this.startBot();
+        new Task(this).startClearCacheTask();
         getLogger().info("Plugin is ready!");
     }
 
@@ -74,6 +76,7 @@ public class TelegramLogin extends JavaPlugin {
             mysql.closePool();
         }
         botThread.stop();
+        Bukkit.getScheduler().cancelTasks(this);
     }
 
     private void startBot(){
