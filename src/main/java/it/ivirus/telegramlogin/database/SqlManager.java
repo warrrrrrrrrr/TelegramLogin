@@ -2,9 +2,12 @@ package it.ivirus.telegramlogin.database;
 
 import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.util.TelegramPlayer;
+import it.ivirus.telegramlogin.util.TelegramPlayerInfo;
 import lombok.Getter;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class SqlManager {
@@ -30,18 +33,19 @@ public abstract class SqlManager {
 
     public void createTables() throws SQLException {
         PreparedStatement data = getConnection().prepareStatement("create TABLE if not exists " + TABLE_PLAYERS + " " +
-                "(PlayerUUID VARCHAR(100), ChatID VARCHAR(100) PRIMARY KEY, Locked BOOLEAN NOT NULL," +
+                "(AccountId INTEGER PRIMARY KEY AUTOINCREMENT, PlayerUUID VARCHAR(100), PlayerName VARCHAR(100), ChatID VARCHAR(100), Locked BOOLEAN NOT NULL," +
                 "RegistrationDate DATETIME NOT NULL)");
         data.executeUpdate();
     }
 
-    public void addPlayerLogin(String playerUUID, String chatId, Date registrationDate) {
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO " + TABLE_PLAYERS + " (PlayerUUID, ChatID, Locked, RegistrationDate)" +
-                " values (?,?,?,?)")) {
+    public void addPlayerLogin(String playerUUID, String playerName, String chatId, Date registrationDate) {
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO " + TABLE_PLAYERS + " (PlayerUUID, PlayerName, ChatID, Locked, RegistrationDate)" +
+                " values (?,?,?,?,?)")) {
             statement.setString(1, playerUUID);
-            statement.setString(2, chatId);
-            statement.setBoolean(3, false);
-            statement.setDate(4, registrationDate);
+            statement.setString(2, playerName);
+            statement.setString(3, chatId);
+            statement.setBoolean(4, false);
+            statement.setDate(5, registrationDate);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -65,16 +69,34 @@ public abstract class SqlManager {
         }, plugin.getExecutor());
     }
 
-    public CompletableFuture<TelegramPlayer> getTelegramPlayerByChatId(String chatId) {
+    public CompletableFuture<TelegramPlayer> getTelegramPlayer(String chatId, int accountId) {
         return CompletableFuture.supplyAsync(() -> {
-            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + TABLE_PLAYERS + " WHERE ChatID=?")) {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + TABLE_PLAYERS + " WHERE ChatID=? AND AccountId=?")) {
                 statement.setString(1, chatId);
+                statement.setInt(2, accountId);
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     return new TelegramPlayer(resultSet.getString("PlayerUUID"), resultSet.getString("ChatID"), resultSet.getBoolean("Locked"), resultSet.getDate("RegistrationDate"));
                 } else {
                     return null;
                 }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }, plugin.getExecutor());
+    }
+
+    public CompletableFuture<List<TelegramPlayerInfo>> getTelegramPlayerInfoList(String chatId) {
+        return CompletableFuture.supplyAsync(() -> {
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + TABLE_PLAYERS + " WHERE ChatID=?")) {
+                statement.setString(1, chatId);
+                ResultSet resultSet = statement.executeQuery();
+                List<TelegramPlayerInfo> telegramPlayerList = new ArrayList<>();
+                while (resultSet.next()){
+                    telegramPlayerList.add(new TelegramPlayerInfo(resultSet.getInt("AccountId"), resultSet.getString("PlayerName"),resultSet.getBoolean("Locked")));
+                }
+                return telegramPlayerList;
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -95,6 +117,16 @@ public abstract class SqlManager {
         try (PreparedStatement statement = connection.prepareStatement("UPDATE " + TABLE_PLAYERS + " SET Locked=? WHERE PlayerUUID=?")) {
             statement.setBoolean(1, value);
             statement.setString(2, playerUUID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void setLockPlayer(int accountId, boolean value) {
+        try (PreparedStatement statement = connection.prepareStatement("UPDATE " + TABLE_PLAYERS + " SET Locked=? WHERE AccountId=?")) {
+            statement.setBoolean(1, value);
+            statement.setInt(2, accountId);
             statement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

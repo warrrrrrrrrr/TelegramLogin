@@ -54,22 +54,13 @@ public class PlayerListener implements Listener {
                 return;
             }
             Date date = new Date(System.currentTimeMillis());
-            plugin.getSql().getTelegramPlayerByChatId(chatId).whenComplete((telegramPlayer, throwable) -> {
-                if (throwable != null)
-                    throwable.printStackTrace();
-            }).thenAccept(telegramPlayer -> {
-                if (telegramPlayer == null) {
-                    plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), chatId, date);
-                    try {
-                        bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ADD_MESSAGE.getString(), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
-                        player.sendMessage(LangConstants.WAIT_FOR_CONFIRM.getFormattedString());
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    player.sendMessage(LangConstants.CHATID_ALREADY_USED.getFormattedString());
-                }
-            });
+            plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), player.getName(), chatId, date);
+            try {
+                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ADD_MESSAGE.getString().replaceAll("%player_name%", player.getName()), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
+                player.sendMessage(LangConstants.WAIT_FOR_CONFIRM.getFormattedString());
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -1,15 +1,14 @@
 package it.ivirus.telegramlogin.util;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import it.ivirus.telegramlogin.TelegramLogin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class Util {
     public static String color(String text) {
@@ -25,7 +24,7 @@ public class Util {
     public static void sendPluginMessage(Player player, PluginMessageAction action) {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
-        try{
+        try {
             out.writeUTF("cache");
             out.writeUTF(action.getType());
             out.writeUTF(player.getUniqueId().toString());
@@ -36,4 +35,6 @@ public class Util {
         }
 
     }
+
+
 }

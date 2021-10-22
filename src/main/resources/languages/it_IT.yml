@@ -6,15 +6,19 @@ errors:
   telegram:
     playerOffline: "\u2757\uFE0F Sei offline! Entra nel server \u2757\uFE0F"
     chatIdNotLinked: "Questo chatId non è collegato ad alcun account minecraft"
+    accountIdNotLinked: "\u2757\uFE0F Questo accountId non esiste o non appartiene a te."
+    invalidValue: "Valore non valido"
 
 info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
     addMessage:
       - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
+      - "\U0001f464 Account: %player_name%"
       - "Conferma setup"
       - "(Seleziona cosa vuoi fare)"
     loginMessage:
       - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
+      - "\U0001f464 Account: %player_name%"
       - "\uD83C\uDF10 \u00BB %player_ip%"
       - "(Seleziona cosa vuoi fare)"
     lockedMessage:
@@ -44,8 +48,13 @@ info:
       - ""
       - "\u27AA /help - per visualizzare questo messaggio"
       - "\u27AA /chatid - per ottenere il tuo chatId"
-      - "\u27AA /unlock - per sbloccare il tuo account"
-      - "\u27AA /lock - per bloccare il tuo account"
+      - "\u27AA /unlock accountId - per sbloccare il tuo account"
+      - "\u27AA /lock accountId - per bloccare il tuo account"
+      - "\u27AA /accountlist - per vedere i tuoi account"
+    accountList: "La tua lista account: "
+    accountStatus: "account status: "
+    accountStatusLocked: "Locked"
+    accountStatusUnlocked: "Unlocked"
     abortButton: "\u274C Annulla"
     confirmButton: "\uD83D\uDFE2 Conferma"
     lockButton: "\u26D4\uFE0F Blocca"

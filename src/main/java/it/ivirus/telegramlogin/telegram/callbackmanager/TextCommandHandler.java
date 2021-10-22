@@ -20,6 +20,7 @@ public class TextCommandHandler {
         registerCommand("/start", new StartTextCommand());
         registerCommand("/chatid", new ChatidTextCommand());
         registerCommand("/lock", new LockTextCommand());
+        registerCommand("/accountlist", new AccountListTextCommand());
         registerCommand("/unlock", new UnlockTextCommand());
     }
 

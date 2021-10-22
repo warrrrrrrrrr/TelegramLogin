@@ -4,10 +4,8 @@ import it.ivirus.telegramlogin.data.Task;
 import it.ivirus.telegramlogin.database.SQLite;
 import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
-import it.ivirus.telegramlogin.spigot.listeners.PlayerListener;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.Secure;
-import it.ivirus.telegramlogin.util.Util;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,12 +38,12 @@ public class TelegramLogin extends JavaPlugin {
         this.createLangFile("en_US", "it_IT");
         this.loadLangConfig();
 
-        if(!new Secure(this, getConfig().getString("license"), "http://hoxija.it:8080/api/client", "6bafe710273471ab74290a5deca50c52423b5964").verify()) {
+        if (!this.checkPrerequisites())
+            return;
+        if (!new Secure(this, getConfig().getString("license"), "http://hoxija.it:8080/api/client", "6bafe710273471ab74290a5deca50c52423b5964").verify()) {
             Bukkit.getPluginManager().disablePlugin(this);
             Bukkit.getScheduler().cancelTasks(this);
-            return;
         }
-
         this.setupDb();
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         this.startBot();
@@ -71,7 +69,7 @@ public class TelegramLogin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (getConfig().getBoolean("MySQL.Enable")){
+        if (getConfig().getBoolean("MySQL.Enable")) {
             MySQL mysql = (MySQL) sql;
             mysql.closePool();
         }
@@ -79,7 +77,28 @@ public class TelegramLogin extends JavaPlugin {
         Bukkit.getScheduler().cancelTasks(this);
     }
 
-    private void startBot(){
+    private boolean checkPrerequisites() {
+        String license = getConfig().getString("license");
+        String bottoken = getConfig().getString("bot.token");
+        boolean status = false;
+        if (license.equalsIgnoreCase("Put your license here")) {
+            System.out.println("Insert your license into config.yml");
+            status = true;
+        }
+        if (bottoken.equalsIgnoreCase("YourToken")) {
+            System.out.println("Insert your bot token into config.yml");
+            status = true;
+        }
+
+        if (status) {
+            Bukkit.getPluginManager().disablePlugin(this);
+            Bukkit.getScheduler().cancelTasks(this);
+            return false;
+        }
+        return true;
+    }
+
+    private void startBot() {
         botThread = new Thread(() -> {
             try {
                 botsApi = new TelegramBotsApi(DefaultBotSession.class);

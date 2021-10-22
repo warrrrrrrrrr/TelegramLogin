@@ -6,15 +6,19 @@ errors:
   telegram:
     playerOffline: "\u2757\uFE0F You're offline! Log into the server \u2757\uFE0F"
     chatIdNotLinked: "This chatId is not linked to any minecraft account"
+    accountIdNotLinked: "\u2757\uFE0F This accountId does not exists or does not belong to you"
+    invalidValue: "Invalid value"
 
 info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
     addMessage:
       - "\u2757\uFE0F TelegramLogin - Login request \u2757\uFE0F"
+      - "\U0001f464 Account name: %player_name%"
       - "Confirm setup"
       - "(Select what you want to do)"
     loginMessage:
       - "\u2757\uFE0F TelegramLogin - Login request \u2757\uFE0F"
+      - "\U0001f464 Account name: %player_name%"
       - "\uD83C\uDF10 \u00BB %player_ip%"
       - "(Select what you want to do)"
     lockedMessage:
@@ -22,7 +26,6 @@ info:
       - "Press 'Unlock' before entering."
     lockedMessageByCommand:
       - "\u2757\uFE0F TelegramLogin - Blocked! \u2757\uFE0F"
-      - "You have blocked the minecraft account associated with your chatid"
       - "Type /unlock to unlock it"
     unlockedMessage: "\U0001f513 TelegramLogin - Unlocked!"
     chatIdConfirmed:
@@ -44,8 +47,13 @@ info:
       - ""
       - "\u27AA /help - to view this message"
       - "\u27AA /chatid - to get your chatId"
-      - "\u27AA /unlock - to unlock your account"
-      - "\u27AA /lock - to block your account"
+      - "\u27AA /unlock accountId - to unlock your account"
+      - "\u27AA /lock accountId - to block your account"
+      - "\u27AA /accountlist - to see your accounts"
+    accountList: "Your account list: "
+    accountStatus: "account status: "
+    accountStatusLocked: "Locked"
+    accountStatusUnlocked: "Unlocked"
     abortButton: "\u274C Cancel"
     confirmButton: "\uD83D\uDFE2 Confirm"
     lockButton: "\u26D4\uFE0F Lock"
@@ -64,7 +72,7 @@ info:
   waitForLoginConfirm: "%prefix%&7: Check the bot to log in."
   operationAborted: "%prefix%&7: Operation canceled"
   kick_logagain: "%prefix%&7: Log in again."
-  kick_accountLocked: "%prefix%&7: Account blocked"
+  kick_accountLocked: "%prefix%&7: Account locked"
   loginExecuted: "%prefix%&7: &bLogin successful."
   accountLinked:
     - "&8&m-------------------------------------------"
