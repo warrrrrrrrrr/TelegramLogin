@@ -3,6 +3,7 @@ package it.ivirus.telegramlogin.bungee.listener;
 import it.ivirus.telegramlogin.data.PlayerData;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
@@ -18,6 +19,11 @@ public class PlayerListener implements Listener {
                 event.setCancelled(true);
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerDisconnectEvent event){
+        PlayerData.getInstance().getBungeePendingPlayers().remove(event.getPlayer().getUniqueId());
     }
 
 }

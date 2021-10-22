@@ -71,7 +71,10 @@ public class LoginListener implements Listener {
 
     }
 
+    @EventHandler
     public void onPlayerLogout(PlayerQuitEvent event){
-
+        Player player = event.getPlayer();
+        playerData.getPlayerInLogin().remove(player.getUniqueId());
+        playerData.getPlayerWaitingForChatid().remove(player.getUniqueId());
     }
 }
