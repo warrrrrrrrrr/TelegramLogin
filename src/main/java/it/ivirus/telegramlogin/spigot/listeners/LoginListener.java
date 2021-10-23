@@ -33,7 +33,8 @@ public class LoginListener implements Listener {
                 return;
             }
             playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
-            Util.sendPluginMessage(player, PluginMessageAction.ADD);
+            if (plugin.getConfig().getBoolean("bungee"))
+                Util.sendPluginMessage(player, PluginMessageAction.ADD);
             try {
                 bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
                 player.sendMessage(LangConstants.WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
@@ -50,8 +51,9 @@ public class LoginListener implements Listener {
             if (telegramPlayer == null) {
                 if (plugin.getConfig().getBoolean("2FA.enabled")) return;
                 playerData.getPlayerWaitingForChatid().add(player.getUniqueId());
-                Util.sendPluginMessage(player, PluginMessageAction.ADD);
-                player.sendMessage(LangConstants.ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", bot.getBotUsername()));
+                if (plugin.getConfig().getBoolean("bungee"))
+                    Util.sendPluginMessage(player, PluginMessageAction.ADD);
+                player.sendMessage(LangConstants.ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
             } else {
                 if (telegramPlayer.isLocked()) {
                     Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString()), 1);

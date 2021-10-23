@@ -4,7 +4,6 @@ import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.telegram.callbackmanager.AbstractUpdate;
 import it.ivirus.telegramlogin.util.LangConstants;
-import it.ivirus.telegramlogin.util.MessageFactory;
 import it.ivirus.telegramlogin.util.TelegramPlayerInfo;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -26,8 +25,13 @@ public class AccountListTextCommand extends AbstractUpdate {
         }).thenAccept(telegramPlayers -> {
             if (!telegramPlayers.isEmpty()) {
                 for (TelegramPlayerInfo tp : telegramPlayers) {
-                    String status = tp.isLocked() ? LangConstants.TG_ACCOUNT_STATUS_LOCKED.getString() : LangConstants.TG_ACCOUNT_STATUS_UNLOCKED.getString();
-                    stringBuilder.append("- (" + tp.getAccountId() + ") " + tp.getPlayerName() + ", " + LangConstants.TG_ACCOUNT_STATUS.getString() + status + "\n");
+                    String status = tp.isLocked() ? LangConstants.TG_ACCOUNT_LIST_LOCKED.getString() : LangConstants.TG_ACCOUNT_LIST_UNLOCKED.getString();
+                    stringBuilder.append(LangConstants.TG_ACCOUNT_LIST_SINTAX.getString()
+                            .replaceAll("%accountID%", String.valueOf(tp.getAccountId()))
+                            .replaceAll("%player_name%", tp.getPlayerName())
+                            .replaceAll("%status%", status)
+                    );
+                    stringBuilder.append("\n");
                 }
             }
             sendMessage.setText(stringBuilder.toString());

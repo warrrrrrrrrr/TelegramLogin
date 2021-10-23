@@ -4,6 +4,7 @@ import it.ivirus.telegramlogin.data.Task;
 import it.ivirus.telegramlogin.database.SQLite;
 import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
+import it.ivirus.telegramlogin.spigot.command.TelegramCommandHandler;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.Secure;
 import lombok.Getter;
@@ -44,6 +45,8 @@ public class TelegramLogin extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
             Bukkit.getScheduler().cancelTasks(this);
         }
+
+        getCommand("telegramlogin").setExecutor(new TelegramCommandHandler(this));
         this.setupDb();
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         this.startBot();
@@ -119,7 +122,7 @@ public class TelegramLogin extends JavaPlugin {
         }
     }
 
-    private void loadLangConfig() {
+    public void loadLangConfig() {
         langFile = new File(getDataFolder(), "languages" + File.separator + getConfig().getString("language") + ".yml");
         if (!langFile.exists()) {
             langFile = new File(getDataFolder(), "languages" + File.separator + "en_US.yml");

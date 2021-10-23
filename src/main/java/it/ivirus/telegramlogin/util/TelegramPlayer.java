@@ -10,7 +10,8 @@ import java.sql.Date;
 @Getter
 public class TelegramPlayer {
     private final String playerUUID;
-    private final String chatID;
+    @Setter
+    private String chatID;
     @Setter
     private boolean locked;
     private final Date registrationDate;
