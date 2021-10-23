@@ -104,6 +104,7 @@ info:
     player:
       - "%prefix% &7Avaiable commands:"
       - "&b/telegramlogin accounts"
+      - "&b/telegramlogin remove"
       - "&b/telegramlogin help"
     admin:
       - "&8&m-----------------------"
