@@ -106,6 +106,7 @@ info:
       - "&b/telegramlogin accounts"
       - "&b/telegramlogin remove"
       - "&b/telegramlogin help"
+      - "&b/telegramlogin 2fa"
     admin:
       - "&8&m-----------------------"
       - "&b/telegramlogin remove [playerName]"
