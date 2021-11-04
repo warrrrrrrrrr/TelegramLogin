@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 public class HelpSubcmd extends SubCommand {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
-        sender.sendMessage(LangConstants.HELP_PLAYER.getFormattedString());
+        sender.sendMessage(LangConstants.INGAME_HELP_PLAYER.getFormattedString());
 
         if (sender.hasPermission("telegramlogin.admin")) {
-            sender.sendMessage(LangConstants.HELP_ADMIN.getFormattedString());
+            sender.sendMessage(LangConstants.INGAME_HELP_ADMIN.getFormattedString());
         }
     }
 }

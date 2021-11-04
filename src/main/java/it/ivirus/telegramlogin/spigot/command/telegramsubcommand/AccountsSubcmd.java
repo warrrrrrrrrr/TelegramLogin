@@ -15,7 +15,7 @@ public class AccountsSubcmd extends SubCommand {
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 1) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage(LangConstants.ONLY_PLAYER.getFormattedString());
+                sender.sendMessage(LangConstants.INGAME_ONLY_PLAYER.getFormattedString());
                 return;
             }
 
@@ -25,7 +25,7 @@ public class AccountsSubcmd extends SubCommand {
             String chatId = telegramPlayer.getChatID();
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(LangConstants.MC_ACCOUNT_LIST.getFormattedString() + "\n");
+            stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
             TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(chatId).whenComplete((telegramPlayers, throwable) -> {
                 if (throwable != null)
@@ -33,9 +33,9 @@ public class AccountsSubcmd extends SubCommand {
             }).thenAccept(telegramPlayers -> {
                 if (!telegramPlayers.isEmpty()) {
                     for (TelegramPlayerInfo tp : telegramPlayers) {
-                        String status = tp.isLocked() ? LangConstants.MC_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.MC_ACCOUNT_LIST_UNLOCKED.getFormattedString();
+                        String status = tp.isLocked() ? LangConstants.INGAME_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.INGAME_ACCOUNT_LIST_UNLOCKED.getFormattedString();
 
-                        stringBuilder.append(LangConstants.MC_ACCOUNT_LIST_SINTAX.getFormattedString()
+                        stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST_SINTAX.getFormattedString()
                                 .replaceAll("%accountID%", String.valueOf(tp.getAccountId()))
                                 .replaceAll("%player_name%", tp.getPlayerName())
                                 .replaceAll("%status%", status)
@@ -47,7 +47,7 @@ public class AccountsSubcmd extends SubCommand {
             });
         } else if (args.length >= 2) {
             if (!sender.hasPermission("telegramlogin.admin")) {
-                sender.sendMessage(LangConstants.NOPERMISSION.getFormattedString());
+                sender.sendMessage(LangConstants.INGAME_NOPERMISSION.getFormattedString());
                 return;
             }
 
@@ -58,7 +58,7 @@ public class AccountsSubcmd extends SubCommand {
                     String chatId = telegramPlayer.getChatID();
 
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append(LangConstants.MC_ACCOUNT_LIST.getFormattedString() + "\n");
+                    stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
                     TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(chatId).whenComplete((telegramPlayers, throwable) -> {
                         if (throwable != null)
@@ -66,9 +66,9 @@ public class AccountsSubcmd extends SubCommand {
                     }).thenAccept(telegramPlayers -> {
                         if (!telegramPlayers.isEmpty()) {
                             for (TelegramPlayerInfo tp : telegramPlayers) {
-                                String status = tp.isLocked() ? LangConstants.MC_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.MC_ACCOUNT_LIST_UNLOCKED.getFormattedString();
+                                String status = tp.isLocked() ? LangConstants.INGAME_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.INGAME_ACCOUNT_LIST_UNLOCKED.getFormattedString();
 
-                                stringBuilder.append(LangConstants.MC_ACCOUNT_LIST_SINTAX.getFormattedString()
+                                stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST_SINTAX.getFormattedString()
                                         .replaceAll("%accountID%", String.valueOf(tp.getAccountId()))
                                         .replaceAll("%player_name%", tp.getPlayerName())
                                         .replaceAll("%status%", status)
@@ -80,7 +80,7 @@ public class AccountsSubcmd extends SubCommand {
                     });
                     return;
                 } else {
-                    sender.sendMessage(LangConstants.TARGET_WITHOUT_TELEGRAM_LOGIN.getFormattedString());
+                    sender.sendMessage(LangConstants.INGAME_TARGET_WITHOUT_TELEGRAM_LOGIN.getFormattedString());
                     return;
                 }
             } else {
@@ -90,7 +90,7 @@ public class AccountsSubcmd extends SubCommand {
                     String chatId = telegramPlayer.getChatID();
 
                     StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append(LangConstants.MC_ACCOUNT_LIST.getFormattedString() + "\n");
+                    stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
                     TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(chatId).whenComplete((telegramPlayers, throwable) -> {
                         if (throwable != null)
@@ -98,9 +98,9 @@ public class AccountsSubcmd extends SubCommand {
                     }).thenAccept(telegramPlayers -> {
                         if (!telegramPlayers.isEmpty()) {
                             for (TelegramPlayerInfo tp : telegramPlayers) {
-                                String status = tp.isLocked() ? LangConstants.MC_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.MC_ACCOUNT_LIST_UNLOCKED.getFormattedString();
+                                String status = tp.isLocked() ? LangConstants.INGAME_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.INGAME_ACCOUNT_LIST_UNLOCKED.getFormattedString();
 
-                                stringBuilder.append(LangConstants.MC_ACCOUNT_LIST_SINTAX.getFormattedString()
+                                stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST_SINTAX.getFormattedString()
                                         .replaceAll("%accountID%", String.valueOf(tp.getAccountId()))
                                         .replaceAll("%player_name%", tp.getPlayerName())
                                         .replaceAll("%status%", status)
@@ -117,11 +117,11 @@ public class AccountsSubcmd extends SubCommand {
                             throwable.printStackTrace();
                     }).thenAccept(telegramPlayer -> {
                         if (telegramPlayer == null) {
-                            sender.sendMessage(LangConstants.TARGET_WITHOUT_TELEGRAM_LOGIN.getFormattedString());
+                            sender.sendMessage(LangConstants.INGAME_TARGET_WITHOUT_TELEGRAM_LOGIN.getFormattedString());
                             return;
                         } else {
                             StringBuilder stringBuilder = new StringBuilder();
-                            stringBuilder.append(LangConstants.MC_ACCOUNT_LIST.getFormattedString() + "\n");
+                            stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
                             TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(telegramPlayer.getChatID()).whenComplete((telegramPlayers, throwable) -> {
                                 if (throwable != null)
@@ -129,9 +129,9 @@ public class AccountsSubcmd extends SubCommand {
                             }).thenAccept(telegramPlayers -> {
                                 if (!telegramPlayers.isEmpty()) {
                                     for (TelegramPlayerInfo tp : telegramPlayers) {
-                                        String status = tp.isLocked() ? LangConstants.MC_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.MC_ACCOUNT_LIST_UNLOCKED.getFormattedString();
+                                        String status = tp.isLocked() ? LangConstants.INGAME_ACCOUNT_LIST_LOCKED.getFormattedString() : LangConstants.INGAME_ACCOUNT_LIST_UNLOCKED.getFormattedString();
 
-                                        stringBuilder.append(LangConstants.MC_ACCOUNT_LIST_SINTAX.getFormattedString()
+                                        stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST_SINTAX.getFormattedString()
                                                 .replaceAll("%accountID%", String.valueOf(tp.getAccountId()))
                                                 .replaceAll("%player_name%", tp.getPlayerName())
                                                 .replaceAll("%status%", status)

@@ -1,59 +1,60 @@
 prefix: "&8(&bTelegram&fLogin&8)&r"
 errors:
-  noPermission: "%prefix%&7: &cPermesso negato."
-  invalidValue: "%prefix%&7: &cValore non valido"
-  onlyPlayer: "%prefix%&7: &cComando eseguibile solo da un giocatore."
-  targetWithoutTelegramLogin:
-    - "&cQuesto giocatore non esiste"
-    - "&co il suo account non è collegato a TelegramLogin"
-  changeChatIdUsage: "%prefix%&7: &c/telegramlogin changechatid [nome giocatore] [chatId]"
-  removeUsage: "%prefix%&7: &c/telegramlogin remove [nome giocatore]"
-  targetOffline: "%prefix%&7: &cTarget offline o non esiste"
-  2FA:
-    cannotRemove: "%prefix%&7: 2FA è disabilitato, non puoi rimuovere il tuo TelegramLogin"
-    playerWithoutTelegramLogin: "%prefix%&7: &cIl tuo account non è collegato a TelegramLogin"
-    disabled: "%prefix%&7: &c2FA is disabled!"
-    playerAlready2FA: "%prefix%&7: Hai gia il 2FA abilitato."
+  in-game:
+    no-permission: "%prefix%&7: &cPermesso negato."
+    invalid-value: "%prefix%&7: &cValore non valido"
+    only-player: "%prefix%&7: &cComando eseguibile solo da un giocatore."
+    target-without-telegramLogin:
+      - "&cQuesto giocatore non esiste"
+      - "&co il suo account non è collegato a TelegramLogin"
+    change-chat-id-usage: "%prefix%&7: &c/telegramlogin changechatid [nome giocatore] [chatId]"
+    remove-usage: "%prefix%&7: &c/telegramlogin remove [nome giocatore]"
+    target-offline: "%prefix%&7: &cTarget offline o non esiste"
+    2FA:
+      cannot-remove: "%prefix%&7: 2FA è disabilitato, non puoi rimuovere il tuo TelegramLogin"
+      player-without-telegramLogin: "%prefix%&7: &cIl tuo account non è collegato a TelegramLogin"
+      disabled: "%prefix%&7: &c2FA is disabled!"
+      player-already2FA: "%prefix%&7: Hai gia il 2FA abilitato."
   telegram:
-    playerOffline: "\u2757\uFE0F Sei offline! Entra nel server \u2757\uFE0F"
-    chatIdNotLinked: "Questo chatId non è collegato ad alcun account minecraft"
-    accountIdNotLinked: "\u2757\uFE0F Questo accountId non esiste o non appartiene a te."
-    invalidValue: "Valore non valido"
+    player-offline: "\u2757\uFE0F Sei offline! Entra nel server \u2757\uFE0F"
+    chat-id-not-linked: "Questo chatId non è collegato ad alcun account minecraft"
+    account-id-not-linked: "\u2757\uFE0F Questo accountId non esiste o non appartiene a te."
+    invalid-value: "Valore non valido"
 
 info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
-    addMessage:
+    add-message:
       - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
       - "\U0001f464 Account: %player_name%"
       - "Conferma setup"
       - "(Seleziona cosa vuoi fare)"
-    loginMessage:
+    login-message:
       - "\u2757\uFE0F TelegramLogin - Richiesta di login \u2757\uFE0F"
       - "\U0001f464 Account: %player_name%"
       - "\uD83C\uDF10 \u00BB %player_ip%"
       - "(Seleziona cosa vuoi fare)"
-    lockedMessage:
+    locked-message:
       - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
       - "Premi 'Sblocca' prima di entrare."
-    lockedMessageByCommand:
+    locked-message-by-command:
       - "\u2757\uFE0F TelegramLogin - Bloccato! \u2757\uFE0F"
       - "Hai bloccato l'account minecraft associato al tuo chatid"
       - "Digita /unlock per sbloccarlo"
-    unlockedMessage: "\U0001f513 TelegramLogin - Sbloccato!"
-    chatIdConfirmed:
+    unlocked-message: "\U0001f513 TelegramLogin - Sbloccato!"
+    chat-id-confirmed:
       - "\u2757\uFE0F TelegramLogin - ChatId confermato!"
       - "\uD83D\uDFE2 Login eseguito"
       - "Puoi tornare in gioco"
-    loginExecuted:
+    login-executed:
       - "\u2757\uFE0F TelegramLogin - Login eseguito!"
       - "Puoi tornare in gioco"
-    helpMessage:
+    help-message:
       - "\u27AA /help - per visualizzare questo messaggio"
       - "\u27AA /chatid - per ottenere il tuo chatId"
       - "\u27AA /unlock - per sbloccare il tuo account"
       - "\u27AA /lock - per bloccare il tuo account"
-    chatIdMessage: "\U0001f4cb Il tuo chatId è: %chatId%"
-    startMessage:
+    chat-id-message: "\U0001f4cb Il tuo chatId è: %chatId%"
+    start-message:
       - "Hai avviato il bot con successo!"
       - "Di seguito trovi i comandi che puoi eseguire:"
       - ""
@@ -62,56 +63,56 @@ info:
       - "\u27AA /unlock accountId - per sbloccare il tuo account"
       - "\u27AA /lock accountId - per bloccare il tuo account"
       - "\u27AA /accountlist - per vedere i tuoi account"
-    accountList:
-      telegramMessage: "Lista account: "
+    account-list:
+      message: "Lista account: "
       locked: "Bloccato"
       unlocked: "Sbloccato"
-      telegramSintax: "\U0001f464 (%accountID%) %player_name% stato: %status%"
-    abortButton: "\u274C Annulla"
-    confirmButton: "\uD83D\uDFE2 Conferma"
-    lockButton: "\u26D4\uFE0F Blocca"
-    unlockButton: "\uD83D\uDFE2 Sblocca"
-    executed: "\u2705 Eseguito"
+      sintax: "\U0001f464 (%accountID%) %player_name% stato: %status%"
+    abort-button: "\u274C Annulla"
+    confirm-button: "\uD83D\uDFE2 Conferma"
+    lock-button: "\u26D4\uFE0F Blocca"
+    unlock-button: "\uD83D\uDFE2 Sblocca"
     aborted: "\u274C Annullato"
     #------------------------------------------------------------------------------------------------
-  accountList:
-    minecraftMessage: "&7Account list: "
-    locked: "Bloccato"
-    unlocked: "Sbloccato"
-    minecraftSintax: "&8(&a%accountID%&8) &7%player_name%, stato: %status%"
-  addChatId:
-    - "&8&m-------------------------------------------"
-    - "&cAssicurati di aver avviato prima"
-    - "&cil nostro bot: &b%bot_tag%&7."
-    - "&7Scrivi in chat il tuo chatId di Telegram"
-    - "&7Lo puoi recuperare utilizzando il nostro bot"
-    - "&8&m-------------------------------------------"
-  waitForConfirm: "%prefix%&7: Controlla il bot per confermare il tuo chatId e quindi loggarti."
-  waitForLoginConfirm: "%prefix%&7: Controlla il bot per loggarti."
-  operationAborted: "%prefix%&7: Operazione annullata"
-  kick_logagain: "%prefix%&7: Rilogga"
-  kick_accountLocked: "%prefix%&7: Account bloccato"
-  loginExecuted: "%prefix%&7: &bLogin eseguito con successo."
-  chatIdChanged: "%prefix%&7: &bChatId cambiato."
-  targetRemoved: "%prefix%&7: TelegramLogin rimosso da &b%target%"
-  accountLinked:
-    - "&8&m-------------------------------------------"
-    - "&bHai collegato con successo il tuo account a telegram!"
-    - "&8&m-------------------------------------------"
-  2FA:
-    accountDisconnected: "%prefix%&7: Hai scollegato il tuo account da TelegramLogin"
-    abort2FA: "%prefix%&7: Digita &cabort &7per annullare l'attivazione del 2FA."
-  help:
-    player:
-      - "%prefix% &7Comandi disponibili:"
-      - "&b/telegramlogin accounts"
-      - "&b/telegramlogin remove"
-      - "&b/telegramlogin help"
-      - "&b/telegramlogin 2fa"
-    admin:
-      - "&8&m-----------------------"
-      - "&b/telegramlogin remove [giocatore]"
-      - "&b/telegramlogin reload"
-      - "&b/telegramlogin remove [accountId]"
-      - "&b/telegramlogin accounts [giocatore]"
-  reloadExecuted: "%prefix%&7: Config e lingua ricaricati."
+  in-game:
+    account-list:
+      message: "&7Account list: "
+      locked: "Bloccato"
+      unlocked: "Sbloccato"
+      sintax: "&8(&a%accountID%&8) &7%player_name%, stato: %status%"
+    add-chat-id:
+      - "&8&m-------------------------------------------"
+      - "&cAssicurati di aver avviato prima"
+      - "&cil nostro bot: &b%bot_tag%&7."
+      - "&7Scrivi in chat il tuo chatId di Telegram"
+      - "&7Lo puoi recuperare utilizzando il nostro bot"
+      - "&8&m-------------------------------------------"
+    wait-for-confirm: "%prefix%&7: Controlla il bot per confermare il tuo chatId e quindi loggarti."
+    wait-for-login-confirm: "%prefix%&7: Controlla il bot per loggarti."
+    operation-aborted: "%prefix%&7: Operazione annullata"
+    kick-logagain: "%prefix%&7: Rilogga"
+    kick-accountLocked: "%prefix%&7: Account bloccato"
+    login-executed: "%prefix%&7: &bLogin eseguito con successo."
+    chat-id-changed: "%prefix%&7: &bChatId cambiato."
+    target-removed: "%prefix%&7: TelegramLogin rimosso da &b%target%"
+    account-linked:
+      - "&8&m-------------------------------------------"
+      - "&bHai collegato con successo il tuo account a telegram!"
+      - "&8&m-------------------------------------------"
+    2FA:
+      account-disconnected: "%prefix%&7: Hai scollegato il tuo account da TelegramLogin"
+      abort-2FA: "%prefix%&7: Digita &cabort &7per annullare l'attivazione del 2FA."
+    help:
+      player:
+        - "%prefix% &7Comandi disponibili:"
+        - "&b/telegramlogin accounts"
+        - "&b/telegramlogin remove"
+        - "&b/telegramlogin help"
+        - "&b/telegramlogin 2fa"
+      admin:
+        - "&8&m-----------------------"
+        - "&b/telegramlogin remove [giocatore]"
+        - "&b/telegramlogin reload"
+        - "&b/telegramlogin remove [accountId]"
+        - "&b/telegramlogin accounts [giocatore]"
+    reload-executed: "%prefix%&7: Config e lingua ricaricati."

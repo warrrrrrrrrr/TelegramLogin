@@ -29,14 +29,14 @@ public class AbortCallbackQuery extends AbstractUpdate {
             }
             if (playerData.getPlayerWaitingForChatid().contains(uuid)) {
                 playerData.getPlayerWaitingForChatid().remove(uuid);
-                player.sendMessage(LangConstants.OPERATION_ABORTED.getFormattedString());
+                player.sendMessage(LangConstants.INGAME_OPERATION_ABORTED.getFormattedString());
                 bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ABORTED_MESSAGE.getString()));
                 return;
             }
             if (playerData.getPlayerInLogin().containsKey(uuid)) {
                 playerData.getPlayerInLogin().remove(uuid);
-                player.sendMessage(LangConstants.OPERATION_ABORTED.getFormattedString());
-                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_LOG_AGAIN.getFormattedString()), 1);
+                player.sendMessage(LangConstants.INGAME_OPERATION_ABORTED.getFormattedString());
+                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.INGAME_KICK_LOG_AGAIN.getFormattedString()), 1);
                 bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ABORTED_MESSAGE.getString()));
             }
         } catch (TelegramApiException e) {

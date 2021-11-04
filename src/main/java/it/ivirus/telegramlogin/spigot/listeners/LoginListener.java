@@ -29,7 +29,7 @@ public class LoginListener implements Listener {
         if (playerData.getPlayerCache().containsKey(player.getUniqueId())) {
             TelegramPlayer telegramPlayer = playerData.getPlayerCache().get(player.getUniqueId());
             if (telegramPlayer.isLocked()) {
-                player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString());
+                player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString());
                 return;
             }
             playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
@@ -37,7 +37,7 @@ public class LoginListener implements Listener {
                 Util.sendPluginMessage(player, PluginMessageAction.ADD);
             try {
                 bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
-                player.sendMessage(LangConstants.WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
+                player.sendMessage(LangConstants.INGAME_WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
@@ -53,10 +53,10 @@ public class LoginListener implements Listener {
                 playerData.getPlayerWaitingForChatid().add(player.getUniqueId());
                 if (plugin.getConfig().getBoolean("bungee"))
                     Util.sendPluginMessage(player, PluginMessageAction.ADD);
-                player.sendMessage(LangConstants.ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
+                player.sendMessage(LangConstants.INGAME_ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
             } else {
                 if (telegramPlayer.isLocked()) {
-                    Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString()), 1);
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString()), 1);
                     return;
                 }
                 playerData.getPlayerCache().put(player.getUniqueId(), telegramPlayer);
@@ -64,7 +64,7 @@ public class LoginListener implements Listener {
                 playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
                 try {
                     bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
-                    player.sendMessage(LangConstants.WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
+                    player.sendMessage(LangConstants.INGAME_WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }

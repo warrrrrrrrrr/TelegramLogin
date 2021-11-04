@@ -32,7 +32,7 @@ public class AddConfirmCallbackQuery extends AbstractUpdate {
             }
             Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
             bot.execute((MessageFactory.simpleMessage(chatId, LangConstants.TG_CHATID_CONFIRMED.getString())));
-            player.sendMessage(LangConstants.ACCOUNT_LINKED.getFormattedString());
+            player.sendMessage(LangConstants.INGAME_ACCOUNT_LINKED.getFormattedString());
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

@@ -8,11 +8,11 @@ public class ReloadSubcmd extends SubCommand {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!sender.hasPermission("telegramlogin.admin")) {
-            sender.sendMessage(LangConstants.NOPERMISSION.getFormattedString());
+            sender.sendMessage(LangConstants.INGAME_NOPERMISSION.getFormattedString());
             return;
         }
         plugin.reloadConfig();
         plugin.loadLangConfig();
-        sender.sendMessage(LangConstants.RELOAD_EXECUTED.getFormattedString());
+        sender.sendMessage(LangConstants.INGAME_RELOAD_EXECUTED.getFormattedString());
     }
 }

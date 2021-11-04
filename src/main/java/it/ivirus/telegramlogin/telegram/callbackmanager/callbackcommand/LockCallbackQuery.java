@@ -31,7 +31,7 @@ public class LockCallbackQuery extends AbstractUpdate {
                     playerData.getPlayerInLogin().remove(uuid);
                     Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
                 }
-                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString()),1);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString()),1);
             }
             bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_LOCKED_MESSAGE.getString(), KeyboardFactory.unlockButton(playerUUID, chatId)));
         } catch (TelegramApiException e) {

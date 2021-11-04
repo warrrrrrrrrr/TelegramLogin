@@ -27,6 +27,6 @@ bot:
 2FA:
   enabled: false  #if false plugin will be used as primary login system (disabling every commands)
                   #if true you will be able to execute commands in "allowedCommands"
-  allowedCommands:
+  allowed-commands:
     - "/login"
     - "/register"

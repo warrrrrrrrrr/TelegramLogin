@@ -37,10 +37,10 @@ public class TelegramCommandHandler implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String arg, String[] args) {
 
         if (args.length == 0 || !commands.containsKey(args[0].toLowerCase())) {
-            sender.sendMessage(LangConstants.HELP_PLAYER.getFormattedString());
+            sender.sendMessage(LangConstants.INGAME_HELP_PLAYER.getFormattedString());
 
             if (sender.hasPermission("telegramlogin.admin")) {
-                sender.sendMessage(LangConstants.HELP_ADMIN.getFormattedString());
+                sender.sendMessage(LangConstants.INGAME_HELP_ADMIN.getFormattedString());
             }
 
             return true;

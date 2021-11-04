@@ -6,7 +6,6 @@ import it.ivirus.telegramlogin.util.LangConstants;
 import it.ivirus.telegramlogin.util.MessageFactory;
 import it.ivirus.telegramlogin.util.PluginMessageAction;
 import it.ivirus.telegramlogin.util.Util;
-import org.apache.commons.codec.language.bm.Lang;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -50,7 +49,7 @@ public class LockTextCommand extends AbstractUpdate {
                                     Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
                                 }
                             }
-                            player.kickPlayer(LangConstants.KICK_ACCOUNT_LOCKED.getFormattedString());
+                            player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString());
                         }
                     }, 1);
                     bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_LOCKED_MESSAGE_BY_COMMAND.getString()));

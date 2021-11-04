@@ -11,22 +11,22 @@ public class TwoFASubcmd extends SubCommand {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)){
-            sender.sendMessage(LangConstants.ONLY_PLAYER.getFormattedString());
+            sender.sendMessage(LangConstants.INGAME_ONLY_PLAYER.getFormattedString());
             return;
         }
         Player player = (Player) sender;
         if (!plugin.getConfig().getBoolean("2FA.enabled")){
-            sender.sendMessage(LangConstants.TWOFA_DISABLED.getFormattedString());
+            sender.sendMessage(LangConstants.INGAME_TWOFA_DISABLED.getFormattedString());
             return;
         }
         if (playerData.getPlayerCache().containsKey(player.getUniqueId())){
-            sender.sendMessage(LangConstants.SENDER_ALREADY_2FA.getFormattedString());
+            sender.sendMessage(LangConstants.INGAME_SENDER_ALREADY_2FA.getFormattedString());
             return;
         }
         playerData.getPlayerWaitingForChatid().add(player.getUniqueId());
         if (plugin.getConfig().getBoolean("bungee"))
             Util.sendPluginMessage(player, PluginMessageAction.ADD);
-        player.sendMessage(LangConstants.ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
-        player.sendMessage(LangConstants.ABORT_2FA.getFormattedString());
+        player.sendMessage(LangConstants.INGAME_ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
+        player.sendMessage(LangConstants.INGAME_ABORT_2FA.getFormattedString());
     }
 }
