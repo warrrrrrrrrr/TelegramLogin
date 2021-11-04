@@ -31,9 +31,25 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
+    public void onPlayerExecuteCommand(PlayerCommandPreprocessEvent event){
+        Player player = event.getPlayer();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())) {
+            String message = event.getMessage().split(" ")[0].toLowerCase();
+            if (plugin.getConfig().getBoolean("2FA.enabled") && plugin.getConfig().getStringList("2FA.allowed-commands").contains(message)) {
+                return;
+            }
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())) {
+            String message = event.getMessage().split(" ")[0].toLowerCase();
+            if (plugin.getConfig().getBoolean("2FA.enabled") && plugin.getConfig().getStringList("2FA.allowed-commands").contains(message)) {
+                return;
+            }
             event.setCancelled(true);
             return;
         }
@@ -43,21 +59,21 @@ public class PlayerListener implements Listener {
             if (chatId.equalsIgnoreCase("abort")) {
                 playerData.getPlayerWaitingForChatid().remove(player.getUniqueId());
                 if (plugin.getConfig().getBoolean("2FA.enabled")) {
-                    player.sendMessage(LangConstants.OPERATION_ABORTED.getFormattedString());
+                    player.sendMessage(LangConstants.INGAME_OPERATION_ABORTED.getFormattedString());
                     return;
                 }
-                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.KICK_LOG_AGAIN.getFormattedString()), 1);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.INGAME_KICK_LOG_AGAIN.getFormattedString()), 1);
                 return;
             }
             if (!NumberUtils.isNumber(chatId)) {
-                player.sendMessage(LangConstants.INVALID_VALUE.getFormattedString());
+                player.sendMessage(LangConstants.INGAME_INVALID_VALUE.getFormattedString());
                 return;
             }
             Date date = new Date(System.currentTimeMillis());
             plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), player.getName(), chatId, date);
             try {
                 bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ADD_MESSAGE.getString().replaceAll("%player_name%", player.getName()), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
-                player.sendMessage(LangConstants.WAIT_FOR_CONFIRM.getFormattedString());
+                player.sendMessage(LangConstants.INGAME_WAIT_FOR_CONFIRM.getFormattedString());
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
