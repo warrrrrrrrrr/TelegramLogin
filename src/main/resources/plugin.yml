@@ -1,7 +1,7 @@
 name: TelegramLogin
 main: it.ivirus.telegramlogin.TelegramLogin
 author: iVirus
-version: 1.0
+version: ${project.version}
 api-version: 1.13
 commands:
   telegramlogin:
