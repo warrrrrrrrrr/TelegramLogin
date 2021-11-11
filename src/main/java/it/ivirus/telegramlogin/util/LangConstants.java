@@ -63,7 +63,6 @@ public enum LangConstants {
 
 
     private final TelegramLogin plugin = TelegramLogin.getInstance();
-    private final FileConfiguration lang = plugin.getLangConfig();
     @Getter
     private final String path;
 
@@ -72,17 +71,17 @@ public enum LangConstants {
     }
 
     private String getPrefix() {
-        return lang.getString(PREFIX.getPath());
+        return plugin.getLangConfig().getString(PREFIX.getPath());
     }
 
     public String getString() {
         StringBuilder stringBuilder = new StringBuilder();
-        if (lang.isList(path)){
-            for (String s : lang.getStringList(path)) {
+        if (plugin.getLangConfig().isList(path)) {
+            for (String s : plugin.getLangConfig().getStringList(path)) {
                 stringBuilder.append(s + "\n");
             }
         } else {
-            return lang.getString(path).replaceAll("%prefix%", getPrefix());
+            return plugin.getLangConfig().getString(path).replaceAll("%prefix%", getPrefix());
         }
         return stringBuilder.toString().replaceAll("%prefix%", getPrefix());
     }

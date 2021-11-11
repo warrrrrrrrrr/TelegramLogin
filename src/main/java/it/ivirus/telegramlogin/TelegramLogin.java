@@ -6,7 +6,6 @@ import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
 import it.ivirus.telegramlogin.spigot.command.TelegramCommandHandler;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
-import it.ivirus.telegramlogin.util.Secure;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,16 +38,11 @@ public class TelegramLogin extends JavaPlugin {
         this.createLangFile("en_US", "it_IT");
         this.loadLangConfig();
 
-        if (!this.checkPrerequisites())
-            return;
-        if (!new Secure(this, getConfig().getString("license"), "http://hoxija.it:8080/api/client", "6bafe710273471ab74290a5deca50c52423b5964").verify()) {
-            Bukkit.getPluginManager().disablePlugin(this);
-            Bukkit.getScheduler().cancelTasks(this);
-        }
+        this.setupDb();
 
         getCommand("telegramlogin").setExecutor(new TelegramCommandHandler(this));
-        this.setupDb();
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
+        if (this.getConfig().getBoolean("bungee"))
+            Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         this.startBot();
         new Task(this).startClearCacheTask();
         getLogger().info("Plugin is ready!");
@@ -78,27 +72,6 @@ public class TelegramLogin extends JavaPlugin {
         }
         botThread.stop();
         Bukkit.getScheduler().cancelTasks(this);
-    }
-
-    private boolean checkPrerequisites() {
-        String license = getConfig().getString("license");
-        String bottoken = getConfig().getString("bot.token");
-        boolean status = false;
-        if (license.equalsIgnoreCase("Put your license here")) {
-            System.out.println("Insert your license into config.yml");
-            status = true;
-        }
-        if (bottoken.equalsIgnoreCase("YourToken")) {
-            System.out.println("Insert your bot token into config.yml");
-            status = true;
-        }
-
-        if (status) {
-            Bukkit.getPluginManager().disablePlugin(this);
-            Bukkit.getScheduler().cancelTasks(this);
-            return false;
-        }
-        return true;
     }
 
     private void startBot() {
