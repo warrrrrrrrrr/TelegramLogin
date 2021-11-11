@@ -7,6 +7,9 @@ import it.ivirus.telegramlogin.database.remote.MySQL;
 import it.ivirus.telegramlogin.spigot.command.TelegramCommandHandler;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import lombok.Getter;
+import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SimplePie;
+import org.bstats.charts.SingleLineChart;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -17,6 +20,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
 @Getter
@@ -45,7 +49,17 @@ public class TelegramLogin extends JavaPlugin {
             Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         this.startBot();
         new Task(this).startClearCacheTask();
+
+        int pluginId = 13305;
+        new Metrics(this, pluginId);
+
+        getLogger().info("---------------------------------------");
+        getLogger().info("TelegramLogin by iVirus_");
+        getLogger().info("Version: " + this.getDescription().getVersion());
+        getLogger().info("Discord support: https://discord.io/hoxija");
+        getLogger().info("Telegram channel: https://t.me/HoxijaChannel");
         getLogger().info("Plugin is ready!");
+        getLogger().info("---------------------------------------");
     }
 
     private void setupDb() {

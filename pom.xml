@@ -5,7 +5,7 @@
 
     <groupId>it.hoxija</groupId>
     <artifactId>TelegramLogin</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -83,9 +83,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1</version>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>2.2.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -103,6 +104,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>it.ivirus.telegramlogin.util</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -111,15 +120,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
             </plugin>
 
         </plugins>
