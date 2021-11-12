@@ -55,7 +55,7 @@ info:
     chat-id-message: "\U0001f4cb Your chatId is: %chatId%"
     start-message:
       - "You started the bot successfully!"
-      - "Here are the commands you can run:"
+      - "These are the commands you can run:"
       - ""
       - "\u27AA /help - to view this message"
       - "\u27AA /chatid - to get your chatId"

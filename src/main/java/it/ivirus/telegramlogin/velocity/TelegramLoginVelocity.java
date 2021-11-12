@@ -10,7 +10,7 @@ import it.ivirus.telegramlogin.velocity.listener.MessageListener;
 import it.ivirus.telegramlogin.velocity.listener.PlayerListener;
 import lombok.Getter;
 
-@Plugin(id = "telegramlogin", name = "TelegramLogin", version = "1.0.1",
+@Plugin(id = "telegramlogin", name = "TelegramLogin", version = "1.0.3",
         url = "https://discord.io/hoxija", authors = {"iVirus"})
 public class TelegramLoginVelocity {
     @Getter
