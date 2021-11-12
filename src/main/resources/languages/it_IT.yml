@@ -20,6 +20,8 @@ errors:
     chat-id-not-linked: "Questo chatId non è collegato ad alcun account minecraft"
     account-id-not-linked: "\u2757\uFE0F Questo accountId non esiste o non appartiene a te."
     invalid-value: "Valore non valido"
+    unlock-usage: "Usa: /unlock accountId"
+    lock-usage: "Usa: /lock accountId"
 
 info:
   telegram: #--------- Bot Messages -------------------------------------------------------------------------
