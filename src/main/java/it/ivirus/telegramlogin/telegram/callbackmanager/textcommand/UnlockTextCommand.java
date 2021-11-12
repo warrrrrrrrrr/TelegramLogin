@@ -16,14 +16,19 @@ public class UnlockTextCommand extends AbstractUpdate {
     @Override
     public void onUpdateCall(TelegramBot bot, Update update, String[] args) {
         String chatId = String.valueOf(update.getMessage().getChatId());
-        if (!NumberUtils.isDigits(args[1])) {
-            try {
-                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_INVALID_VALUE.getString()));
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
+        try {
+            if (args.length != 2) {
+                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_UNLOCK_USAGE.getString()));
+                return;
             }
-            return;
+            if (!NumberUtils.isDigits(args[1])) {
+                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_INVALID_VALUE.getString()));
+                return;
+            }
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
+
         int accountId = Integer.parseInt(args[1]);
         plugin.getSql().getTelegramPlayer(chatId, accountId).whenComplete((telegramPlayer, throwable) -> {
             if (throwable != null)
@@ -34,7 +39,7 @@ public class UnlockTextCommand extends AbstractUpdate {
                     bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ACCOUNTID_NOT_LINKED.getString()));
                 } else {
                     plugin.getSql().setLockPlayer(accountId, false);
-                    if (playerData.getPlayerCache().containsKey(UUID.fromString(telegramPlayer.getPlayerUUID()))){
+                    if (playerData.getPlayerCache().containsKey(UUID.fromString(telegramPlayer.getPlayerUUID()))) {
                         playerData.getPlayerCache().get(UUID.fromString(telegramPlayer.getPlayerUUID())).setLocked(false);
                     }
                     bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_UNLOCKED_MESSAGE.getString()));

@@ -18,13 +18,17 @@ public class LockTextCommand extends AbstractUpdate {
     @Override
     public void onUpdateCall(TelegramBot bot, Update update, String[] args) {
         String chatId = String.valueOf(update.getMessage().getChatId());
-        if (!NumberUtils.isDigits(args[1])) {
-            try {
-                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_INVALID_VALUE.getString()));
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
+        try {
+            if (args.length != 2) {
+                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_LOCK_USAGE.getString()));
+                return;
             }
-            return;
+            if (!NumberUtils.isDigits(args[1])) {
+                bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_INVALID_VALUE.getString()));
+                return;
+            }
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
         int accountId = Integer.parseInt(args[1]);
 
