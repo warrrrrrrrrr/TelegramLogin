@@ -13,7 +13,7 @@ errors:
     2FA:
       cannot-remove: "%prefix%&7: 2FA è disabilitato, non puoi rimuovere il tuo TelegramLogin"
       player-without-telegramLogin: "%prefix%&7: &cIl tuo account non è collegato a TelegramLogin"
-      disabled: "%prefix%&7: &c2FA is disabled!"
+      disabled: "%prefix%&7: &cIl 2FA è disabilitato!"
       player-already2FA: "%prefix%&7: Hai gia il 2FA abilitato."
   telegram:
     player-offline: "\u2757\uFE0F Sei offline! Entra nel server \u2757\uFE0F"
