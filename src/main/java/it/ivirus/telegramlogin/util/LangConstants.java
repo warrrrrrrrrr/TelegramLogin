@@ -42,7 +42,7 @@ public enum LangConstants {
     INGAME_TARGET_REMOVED("info.in-game.target-removed"),
     INGAME_CANNOT_REMOVE("errors.in-game.2FA.cannot-remove"),
     INGAME_TWOFA_DISABLED("errors.in-game.2FA.disabled"),
-    INGAME_SENDER_ALREADY_2FA("errors.in-game.2FA.player-already-2FA"),
+    INGAME_SENDER_ALREADY_2FA("errors.in-game.2FA.player-already2FA"),
     INGAME_SENDER_WITHOUT_TELEGRAMLOGIN("errors.in-game.2FA.player-without-telegramLogin"),
     INGAME_WAIT_FOR_CONFIRM("info.in-game.wait-for-confirm"),
     INGAME_WAIT_FOR_LOGIN_CONFIRM("info.in-game.wait-for-login-confirm"),
