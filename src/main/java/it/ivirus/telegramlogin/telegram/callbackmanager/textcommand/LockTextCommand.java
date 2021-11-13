@@ -49,7 +49,7 @@ public class LockTextCommand extends AbstractUpdate {
                         if (player != null) {
                             if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())) {
                                 playerData.getPlayerInLogin().remove(player.getUniqueId());
-                                if (plugin.getConfig().getBoolean("bungee")) {
+                                if (plugin.isBungeeEnabled()) {
                                     Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
                                 }
                             }

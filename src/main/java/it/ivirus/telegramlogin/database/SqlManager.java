@@ -31,12 +31,7 @@ public abstract class SqlManager {
         }
     }
 
-    public void createTables() throws SQLException {
-        PreparedStatement data = getConnection().prepareStatement("create TABLE if not exists " + TABLE_PLAYERS + " " +
-                "(AccountId INTEGER PRIMARY KEY AUTOINCREMENT, PlayerUUID VARCHAR(100), PlayerName VARCHAR(100), ChatID VARCHAR(100), Locked BOOLEAN NOT NULL," +
-                "RegistrationDate DATETIME NOT NULL)");
-        data.executeUpdate();
-    }
+    public abstract void createTables() throws SQLException;
 
     public void addPlayerLogin(String playerUUID, String playerName, String chatId, Date registrationDate) {
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO " + TABLE_PLAYERS + " (PlayerUUID, PlayerName, ChatID, Locked, RegistrationDate)" +

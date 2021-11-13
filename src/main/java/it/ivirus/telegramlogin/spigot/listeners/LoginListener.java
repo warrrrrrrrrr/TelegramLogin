@@ -33,7 +33,7 @@ public class LoginListener implements Listener {
                 return;
             }
             playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
-            if (plugin.getConfig().getBoolean("bungee"))
+            if (plugin.isBungeeEnabled())
                 Util.sendPluginMessage(player, PluginMessageAction.ADD);
             try {
                 bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
@@ -51,7 +51,7 @@ public class LoginListener implements Listener {
             if (telegramPlayer == null) {
                 if (plugin.getConfig().getBoolean("2FA.enabled")) return;
                 playerData.getPlayerWaitingForChatid().add(player.getUniqueId());
-                if (plugin.getConfig().getBoolean("bungee"))
+                if (plugin.isBungeeEnabled())
                     Util.sendPluginMessage(player, PluginMessageAction.ADD);
                 player.sendMessage(LangConstants.INGAME_ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
             } else {
@@ -60,7 +60,8 @@ public class LoginListener implements Listener {
                     return;
                 }
                 playerData.getPlayerCache().put(player.getUniqueId(), telegramPlayer);
-                Util.sendPluginMessage(player, PluginMessageAction.ADD);
+                if (plugin.isBungeeEnabled())
+                    Util.sendPluginMessage(player, PluginMessageAction.ADD);
                 playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
                 try {
                     bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
