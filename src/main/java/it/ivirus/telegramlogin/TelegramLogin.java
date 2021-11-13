@@ -5,6 +5,7 @@ import it.ivirus.telegramlogin.database.SQLite;
 import it.ivirus.telegramlogin.database.SqlManager;
 import it.ivirus.telegramlogin.database.remote.MySQL;
 import it.ivirus.telegramlogin.spigot.command.TelegramCommandHandler;
+import it.ivirus.telegramlogin.spigot.command.TgCommandTabCompleter;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import lombok.Getter;
 import org.bstats.bukkit.Metrics;
@@ -33,6 +34,7 @@ public class TelegramLogin extends JavaPlugin {
     private SqlManager sql;
     private File langFile;
     private FileConfiguration langConfig;
+    private boolean bungeeEnabled = false;
     private final Executor executor = runnable -> Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
 
     @Override
@@ -45,8 +47,11 @@ public class TelegramLogin extends JavaPlugin {
         this.setupDb();
 
         getCommand("telegramlogin").setExecutor(new TelegramCommandHandler(this));
-        if (this.getConfig().getBoolean("bungee"))
+        getCommand("telegramlogin").setTabCompleter(new TgCommandTabCompleter(this));
+        if (this.getConfig().getBoolean("bungee")){
+            this.bungeeEnabled = true;
             Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
+        }
         this.startBot();
         new Task(this).startClearCacheTask();
 
