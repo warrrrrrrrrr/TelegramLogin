@@ -18,9 +18,6 @@ public class PlayerListener implements Listener {
             if (PlayerData.getInstance().getBungeePendingPlayers().contains(player.getUniqueId())) {
                 event.setCancelled(true);
             }
-            if (PlayerData.getInstance().getPlayerWaitingForChatid().contains(player.getUniqueId())) {
-                event.setCancelled(true);
-            }
         }
     }
 

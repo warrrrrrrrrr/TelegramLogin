@@ -17,15 +17,11 @@ public class PlayerListener {
             event.setResult(CommandExecuteEvent.CommandResult.denied());
         }
 
-        if (PlayerData.getInstance().getPlayerWaitingForChatid().contains(player.getUniqueId())) {
-            event.setResult(CommandExecuteEvent.CommandResult.denied());
-        }
     }
 
     @Subscribe
     public void onPlayerQuit(DisconnectEvent event) {
         PlayerData.getInstance().getBungeePendingPlayers().remove(event.getPlayer().getUniqueId());
-        PlayerData.getInstance().getPlayerWaitingForChatid().remove(event.getPlayer().getUniqueId());
     }
 
 }

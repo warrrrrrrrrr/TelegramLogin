@@ -4,7 +4,6 @@ import lombok.Getter;
 
 public enum PluginMessageAction {
     ADD ("add"),
-    ADD2FA("add2fa"),
     REMOVE ("remove");
 
     @Getter
