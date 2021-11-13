@@ -35,6 +35,10 @@ public class MessageListener {
                 PlayerData.getInstance().getBungeePendingPlayers().remove(playerUUID);
                 break;
             }
+            case "add2fa": {
+                PlayerData.getInstance().getPlayerWaitingForChatid().add(playerUUID);
+                break;
+            }
             default:
                 return;
         }
