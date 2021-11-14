@@ -25,7 +25,7 @@ public class TelegramLoginVelocity {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         server.getChannelRegistrar().register(MinecraftChannelIdentifier.create("hxj", "telegramlogin"));
         server.getEventManager().register(this, new MessageListener());
-        server.getEventManager().register(this, new PlayerListener());
+        server.getEventManager().register(this, new PlayerListener(server));
     }
 
 }
