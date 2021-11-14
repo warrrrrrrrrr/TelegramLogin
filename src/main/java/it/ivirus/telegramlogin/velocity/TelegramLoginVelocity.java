@@ -10,7 +10,7 @@ import it.ivirus.telegramlogin.velocity.listener.MessageListener;
 import it.ivirus.telegramlogin.velocity.listener.PlayerListener;
 import lombok.Getter;
 
-@Plugin(id = "telegramlogin", name = "TelegramLogin", version = "1.0.6",
+@Plugin(id = "telegramlogin", name = "TelegramLogin", version = "1.0.6.1",
         url = "https://discord.io/hoxija", authors = {"iVirus"})
 public class TelegramLoginVelocity {
     @Getter
@@ -23,9 +23,9 @@ public class TelegramLoginVelocity {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        server.getEventManager().register(this, new PlayerListener());
-        server.getEventManager().register(this, new MessageListener());
         server.getChannelRegistrar().register(MinecraftChannelIdentifier.create("hxj", "telegramlogin"));
+        server.getEventManager().register(this, new MessageListener());
+        server.getEventManager().register(this, new PlayerListener());
     }
 
 }

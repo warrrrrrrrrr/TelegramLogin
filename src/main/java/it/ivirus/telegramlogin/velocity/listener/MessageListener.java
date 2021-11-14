@@ -2,6 +2,7 @@ package it.ivirus.telegramlogin.velocity.listener;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PluginMessageEvent;
 import com.velocitypowered.api.proxy.ServerConnection;
@@ -12,9 +13,8 @@ import java.util.UUID;
 public class MessageListener {
 
     @SuppressWarnings("UnstableApiUsage")
-    @Subscribe
+    @Subscribe(order = PostOrder.LAST)
     public void onMessageReceived(PluginMessageEvent event) {
-
         if (!(event.getIdentifier().getId().equalsIgnoreCase("hxj:telegramlogin"))
                 || !(event.getSource() instanceof ServerConnection))
             return;
