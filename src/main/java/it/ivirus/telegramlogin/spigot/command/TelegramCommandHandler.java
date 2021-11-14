@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,13 @@ public class TelegramCommandHandler implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String arg, String[] args) {
+
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (playerData.getPlayerInLogin().containsKey(player.getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
+                return true;
+            }
+        }
 
         if (args.length == 0 || !commands.containsKey(args[0].toLowerCase())) {
             sender.sendMessage(LangConstants.INGAME_HELP_PLAYER.getFormattedString());

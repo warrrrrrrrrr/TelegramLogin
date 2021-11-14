@@ -1,5 +1,6 @@
 package it.ivirus.telegramlogin.spigot.listeners;
 
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.data.PlayerData;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
@@ -9,10 +10,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -28,8 +32,8 @@ public class PlayerListener implements Listener {
         this.bot = bot;
     }
 
-    @EventHandler
-    public void onPlayerExecuteCommand(PlayerCommandPreprocessEvent event){
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerExecuteCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())) {
             String message = event.getMessage().split(" ")[0].toLowerCase();
@@ -40,7 +44,7 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (playerData.getPlayerInLogin().containsKey(player.getUniqueId())) {
@@ -95,13 +99,43 @@ public class PlayerListener implements Listener {
                 z += .5;
                 event.getPlayer().teleport(new Location(from.getWorld(), x, from.getY(), z, from.getYaw(), from.getPitch()));
             }
+
+            event.setTo(event.getFrom());
+
+        }
+    }
+
+    @EventHandler (priority = EventPriority.LOWEST)
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler (priority = EventPriority.LOWEST)
+    public void onPlayerClickOnGui(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler (priority = EventPriority.LOWEST)
+    public void onPlayerChangeItemHeld(PlayerItemHeldEvent event) {
+        Player player = event.getPlayer();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
+            event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+    public void onPlayerOpenGui(InventoryOpenEvent event) {
+        if (!(event.getPlayer() instanceof Player)) return;
+        Player player = (Player) event.getPlayer();
+        if (playerData.getPlayerInLogin().containsKey(player.getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(player.getUniqueId())) {
             event.setCancelled(true);
+            Bukkit.getScheduler().runTaskLater(plugin, player::closeInventory, 1);
         }
     }
 
@@ -112,7 +146,14 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOWEST)
+    public void onPlayerDropItem(PlayerSwapHandItemsEvent event) {
+        if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onPlayerPickItem(EntityPickupItemEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
