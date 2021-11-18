@@ -7,6 +7,7 @@ import it.ivirus.telegramlogin.database.remote.MySQL;
 import it.ivirus.telegramlogin.spigot.command.TelegramCommandHandler;
 import it.ivirus.telegramlogin.spigot.command.TgCommandTabCompleter;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
+import it.ivirus.telegramlogin.util.UpdateChecker;
 import lombok.Getter;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -68,6 +69,7 @@ public class TelegramLogin extends JavaPlugin {
         getLogger().info("Telegram channel: https://t.me/HoxijaChannel");
         getLogger().info("Plugin is ready!");
         getLogger().info("---------------------------------------");
+        this.versionCheck();
     }
 
     private void setupDb() {
@@ -94,6 +96,17 @@ public class TelegramLogin extends JavaPlugin {
         }
         botThread.stop();
         Bukkit.getScheduler().cancelTasks(this);
+    }
+
+    private void versionCheck(){
+        new UpdateChecker(this, 97563).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                getLogger().info("The plugin is up to date.");
+            } else {
+                getLogger().info("There is a new update available.");
+                getLogger().info("Download it from: https://www.spigotmc.org/resources/telegramlogin.97563/");
+            }
+        });
     }
 
     private void startBot() {
