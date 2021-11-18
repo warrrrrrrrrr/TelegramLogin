@@ -21,6 +21,14 @@ bot:
   token: "YourToken"    #recover it from @BotFather
 
 #########################################################################
+#                          Login session                                #
+#########################################################################
+
+login-session: true     #if true you don't need to repeat the telegram check on every login
+                        #if false you need to repeat the telegram check on every login
+
+
+#########################################################################
 #                          2FA Section                                  #
 #########################################################################
 2FA:

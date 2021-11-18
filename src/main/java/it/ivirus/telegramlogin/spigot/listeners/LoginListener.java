@@ -4,6 +4,7 @@ import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.data.PlayerData;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.*;
+import org.apache.commons.codec.language.bm.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,13 +24,17 @@ public class LoginListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerPostLogin(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
         if (playerData.getPlayerCache().containsKey(player.getUniqueId())) {
             TelegramPlayer telegramPlayer = playerData.getPlayerCache().get(player.getUniqueId());
             if (telegramPlayer.isLocked()) {
                 player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString());
+                return;
+            }
+            if (plugin.isLoginSessionEnabled() && telegramPlayer.getPlayerIp().equalsIgnoreCase(player.getAddress().getHostString())) {
+                player.sendMessage(LangConstants.INGAME_LOGINSESSION_LOGGED.getFormattedString());
                 return;
             }
             playerData.getPlayerInLogin().put(player.getUniqueId(), telegramPlayer);
@@ -64,6 +69,9 @@ public class LoginListener implements Listener {
                     Bukkit.getScheduler().runTaskLater(plugin, () -> player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString()), 1);
                     return;
                 }
+                if (plugin.isLoginSessionEnabled()) {
+                    telegramPlayer.setPlayerIp(player.getAddress().getHostString());
+                }
                 playerData.getPlayerCache().put(player.getUniqueId(), telegramPlayer);
                 Bukkit.getScheduler().runTaskLater(plugin, () -> {
                     if (plugin.isBungeeEnabled())
@@ -82,7 +90,7 @@ public class LoginListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerLogout(PlayerQuitEvent event){
+    public void onPlayerLogout(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         playerData.getPlayerInLogin().remove(player.getUniqueId());
         playerData.getPlayerWaitingForChatid().remove(player.getUniqueId());

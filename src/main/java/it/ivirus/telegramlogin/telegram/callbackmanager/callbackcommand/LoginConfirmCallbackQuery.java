@@ -32,6 +32,7 @@ public class LoginConfirmCallbackQuery extends AbstractUpdate {
             }
             if (plugin.isBungeeEnabled())
                 Util.sendPluginMessage(player, PluginMessageAction.REMOVE);
+            playerData.getPlayerCache().get(uuid).setPlayerIp(player.getAddress().getHostString());
             bot.execute((MessageFactory.simpleMessage(chatId, LangConstants.TG_LOGIN_EXECUTED.getString())));
             player.sendMessage(LangConstants.INGAME_LOGIN_EXECUTED.getFormattedString());
         } catch (TelegramApiException e) {

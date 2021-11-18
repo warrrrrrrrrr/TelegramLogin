@@ -103,6 +103,8 @@ info:
     2FA:
       account-disconnected: "%prefix%&7: You have disconnected your account from TelegramLogin"
       abort-2FA: "%prefix%&7: Type &cabort &7to cancel 2FA activation."
+    login-session:
+      logged-automatically: "%prefix%&7: Logged automatically (login session)."
     help:
       player:
         - "%prefix% &7Avaiable commands:"

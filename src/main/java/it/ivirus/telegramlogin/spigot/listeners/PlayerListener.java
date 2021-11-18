@@ -72,8 +72,6 @@ public class PlayerListener implements Listener {
                 player.sendMessage(LangConstants.INGAME_INVALID_VALUE.getFormattedString());
                 return;
             }
-            Date date = new Date(System.currentTimeMillis());
-            plugin.getSql().addPlayerLogin(player.getUniqueId().toString(), player.getName(), chatId, date);
             try {
                 bot.execute(MessageFactory.simpleMessage(chatId, LangConstants.TG_ADD_MESSAGE.getString().replaceAll("%player_name%", player.getName()), KeyboardFactory.addConfirmButtons(player.getUniqueId().toString(), chatId)));
                 player.sendMessage(LangConstants.INGAME_WAIT_FOR_CONFIRM.getFormattedString());
@@ -99,8 +97,6 @@ public class PlayerListener implements Listener {
                 z += .5;
                 event.getPlayer().teleport(new Location(from.getWorld(), x, from.getY(), z, from.getYaw(), from.getPitch()));
             }
-
-            event.setTo(event.getFrom());
 
         }
     }
@@ -147,7 +143,7 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler (priority = EventPriority.LOWEST)
-    public void onPlayerDropItem(PlayerSwapHandItemsEvent event) {
+    public void onPlayerSwapItem(PlayerSwapHandItemsEvent event) {
         if (playerData.getPlayerInLogin().containsKey(event.getPlayer().getUniqueId()) || playerData.getPlayerWaitingForChatid().contains(event.getPlayer().getUniqueId())) {
             event.setCancelled(true);
         }

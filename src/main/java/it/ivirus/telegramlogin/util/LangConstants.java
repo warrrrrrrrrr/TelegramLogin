@@ -61,6 +61,7 @@ public enum LangConstants {
     INGAME_REMOVE_USAGE("errors.in-game.remove-usage"),
     INGAME_TARGET_OFFLINE("errors.in-game.target-offline"),
     INGAME_TARGET_WITHOUT_TELEGRAM_LOGIN("errors.in-game.target-without-telegramLogin"),
+    INGAME_LOGINSESSION_LOGGED("info.in-game.login-session.logged-automatically"),
     INGAME_NOPERMISSION("errors.in-game.no-permission");
 
 

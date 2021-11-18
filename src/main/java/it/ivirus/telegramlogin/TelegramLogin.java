@@ -21,7 +21,6 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 
 @Getter
@@ -35,6 +34,7 @@ public class TelegramLogin extends JavaPlugin {
     private File langFile;
     private FileConfiguration langConfig;
     private boolean bungeeEnabled = false;
+    private boolean loginSessionEnabled = false;
     private final Executor executor = runnable -> Bukkit.getScheduler().runTaskAsynchronously(this, runnable);
 
     @Override
@@ -48,10 +48,13 @@ public class TelegramLogin extends JavaPlugin {
 
         getCommand("telegramlogin").setExecutor(new TelegramCommandHandler(this));
         getCommand("telegramlogin").setTabCompleter(new TgCommandTabCompleter(this));
-        if (this.getConfig().getBoolean("bungee")){
+        if (this.getConfig().getBoolean("bungee")) {
             this.bungeeEnabled = true;
             Bukkit.getMessenger().registerOutgoingPluginChannel(this, "hxj:telegramlogin");
         }
+        if (this.getConfig().getBoolean("login-session"))
+            this.loginSessionEnabled = true;
+
         this.startBot();
         new Task(this).startClearCacheTask();
 
