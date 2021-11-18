@@ -40,7 +40,7 @@ public class TelegramLogin extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
-        this.createLangFile("en_US", "it_IT");
+        this.createLangFile("en_US", "it_IT", "ru_RU");
         this.loadLangConfig();
 
         this.setupDb();
