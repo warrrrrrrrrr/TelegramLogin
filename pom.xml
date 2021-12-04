@@ -5,7 +5,7 @@
 
     <groupId>it.hoxija</groupId>
     <artifactId>TelegramLogin</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -114,15 +114,17 @@
                 <configuration>
                     <artifactSet>
                         <excludes>
-                            <exclude>
-                                org.javassist:javassist
-                            </exclude>
+                            <exclude>org.javassist:javassist</exclude>
                         </excludes>
                     </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>it.ivirus.telegramlogin.util</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.zaxxer</pattern>
+                            <shadedPattern>it.ivirus.telegramlogin.hikari</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
