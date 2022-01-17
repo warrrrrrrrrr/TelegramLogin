@@ -24,7 +24,7 @@ public class TwoFASubcmd extends SubCommand {
             return;
         }
         playerData.getPlayerWaitingForChatid().add(player.getUniqueId());
-        if (plugin.getConfig().getBoolean("bungee"))
+        if (plugin.isBungeeEnabled())
             Util.sendPluginMessage(player, PluginMessageAction.ADD);
         player.sendMessage(LangConstants.INGAME_ADD_CHATID.getFormattedString().replaceAll("%bot_tag%", plugin.getConfig().getString("bot.name")));
         player.sendMessage(LangConstants.INGAME_ABORT_2FA.getFormattedString());

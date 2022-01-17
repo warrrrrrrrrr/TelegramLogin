@@ -1,10 +1,6 @@
 package it.ivirus.telegramlogin.telegram.callbackmanager;
 
 import it.ivirus.telegramlogin.TelegramLogin;
-import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AbortCallbackQuery;
-import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.AddConfirmCallbackQuery;
-import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.LockCallbackQuery;
-import it.ivirus.telegramlogin.telegram.callbackmanager.callbackcommand.LoginConfirmCallbackQuery;
 import it.ivirus.telegramlogin.telegram.callbackmanager.textcommand.*;
 import lombok.Getter;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -30,6 +26,8 @@ public class TextCommandHandler {
     private final Map<String, AbstractUpdate> commands = new HashMap<>();
 
     public void run(Update update) {
+        if (update.getMessage() == null) return;
+        
         String[] args = update.getMessage().getText().split(" ");
         if (!this.isTextCommand(args[0])) return;
         if (!commands.containsKey(args[0])) return;

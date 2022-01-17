@@ -7,9 +7,7 @@ import it.ivirus.telegramlogin.database.remote.MySQL;
 import it.ivirus.telegramlogin.spigot.command.TelegramCommandHandler;
 import it.ivirus.telegramlogin.spigot.command.TgCommandTabCompleter;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
-import it.ivirus.telegramlogin.util.UpdateChecker;
 import lombok.Getter;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -55,10 +53,7 @@ public class TelegramLogin extends JavaPlugin {
             this.loginSessionEnabled = true;
 
         this.startBot();
-        new Task(this).startClearCacheTask();
-
-        int pluginId = 13305;
-        new Metrics(this, pluginId);
+        // new Task(this).startClearCacheTask();
 
         getLogger().info("---------------------------------------");
         getLogger().info("TelegramLogin by iVirus_");
@@ -67,7 +62,6 @@ public class TelegramLogin extends JavaPlugin {
         getLogger().info("Telegram channel: https://t.me/HoxijaChannel");
         getLogger().info("Plugin is ready!");
         getLogger().info("---------------------------------------");
-        this.versionCheck();
     }
 
     private void setupDb() {
@@ -93,18 +87,9 @@ public class TelegramLogin extends JavaPlugin {
             mysql.closePool();
         }
         botThread.stop();
+        botThread = null;
         Bukkit.getScheduler().cancelTasks(this);
-    }
-
-    private void versionCheck(){
-        new UpdateChecker(this, 97563).getVersion(version -> {
-            if (this.getDescription().getVersion().equals(version)) {
-                getLogger().info("The plugin is up to date.");
-            } else {
-                getLogger().info("There is a new update available.");
-                getLogger().info("Download it from: https://www.spigotmc.org/resources/telegramlogin.97563/");
-            }
-        });
+        instance = null;
     }
 
     private void startBot() {
@@ -134,5 +119,9 @@ public class TelegramLogin extends JavaPlugin {
             langFile = new File(getDataFolder(), "languages" + File.separator + "en_US.yml");
         }
         langConfig = YamlConfiguration.loadConfiguration(langFile);
+    }
+    
+    public static TelegramLogin getInstance() {
+        return instance;
     }
 }

@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class AccountsSubcmd extends SubCommand {
+
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (args.length == 1) {
@@ -22,14 +23,20 @@ public class AccountsSubcmd extends SubCommand {
             Player player = (Player) sender;
             TelegramPlayer telegramPlayer = playerData.getPlayerCache().get(player.getUniqueId());
 
+            if (telegramPlayer == null) {
+                sender.sendMessage(LangConstants.INGAME_TARGET_WITHOUT_TELEGRAM_LOGIN.getFormattedString());
+                return;
+            }
+
             String chatId = telegramPlayer.getChatID();
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
             TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(chatId).whenComplete((telegramPlayers, throwable) -> {
-                if (throwable != null)
+                if (throwable != null) {
                     throwable.printStackTrace();
+                }
             }).thenAccept(telegramPlayers -> {
                 if (!telegramPlayers.isEmpty()) {
                     for (TelegramPlayerInfo tp : telegramPlayers) {
@@ -61,8 +68,9 @@ public class AccountsSubcmd extends SubCommand {
                     stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
                     TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(chatId).whenComplete((telegramPlayers, throwable) -> {
-                        if (throwable != null)
+                        if (throwable != null) {
                             throwable.printStackTrace();
+                        }
                     }).thenAccept(telegramPlayers -> {
                         if (!telegramPlayers.isEmpty()) {
                             for (TelegramPlayerInfo tp : telegramPlayers) {
@@ -93,8 +101,9 @@ public class AccountsSubcmd extends SubCommand {
                     stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
                     TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(chatId).whenComplete((telegramPlayers, throwable) -> {
-                        if (throwable != null)
+                        if (throwable != null) {
                             throwable.printStackTrace();
+                        }
                     }).thenAccept(telegramPlayers -> {
                         if (!telegramPlayers.isEmpty()) {
                             for (TelegramPlayerInfo tp : telegramPlayers) {
@@ -113,8 +122,9 @@ public class AccountsSubcmd extends SubCommand {
                     return;
                 } else {
                     plugin.getSql().getTelegramPlayer(offlineTarget.getUniqueId().toString()).whenComplete((telegramPlayer, throwable) -> {
-                        if (throwable != null)
+                        if (throwable != null) {
                             throwable.printStackTrace();
+                        }
                     }).thenAccept(telegramPlayer -> {
                         if (telegramPlayer == null) {
                             sender.sendMessage(LangConstants.INGAME_TARGET_WITHOUT_TELEGRAM_LOGIN.getFormattedString());
@@ -124,8 +134,9 @@ public class AccountsSubcmd extends SubCommand {
                             stringBuilder.append(LangConstants.INGAME_ACCOUNT_LIST.getFormattedString() + "\n");
 
                             TelegramLogin.getInstance().getSql().getTelegramPlayerInfoList(telegramPlayer.getChatID()).whenComplete((telegramPlayers, throwable) -> {
-                                if (throwable != null)
+                                if (throwable != null) {
                                     throwable.printStackTrace();
+                                }
                             }).thenAccept(telegramPlayers -> {
                                 if (!telegramPlayers.isEmpty()) {
                                     for (TelegramPlayerInfo tp : telegramPlayers) {

@@ -11,6 +11,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Util {
+
     public static String color(String text) {
         return ChatColor.translateAlternateColorCodes('&', text);
     }
@@ -22,6 +23,10 @@ public class Util {
     }
 
     public static void sendPluginMessage(Player player, PluginMessageAction action) {
+        if (!TelegramLogin.getInstance().isBungeeEnabled()) {
+            return;
+        }
+
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
         try {
@@ -35,6 +40,5 @@ public class Util {
         }
 
     }
-
 
 }

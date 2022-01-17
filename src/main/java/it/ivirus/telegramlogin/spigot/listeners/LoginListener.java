@@ -4,7 +4,6 @@ import it.ivirus.telegramlogin.TelegramLogin;
 import it.ivirus.telegramlogin.data.PlayerData;
 import it.ivirus.telegramlogin.telegram.TelegramBot;
 import it.ivirus.telegramlogin.util.*;
-import org.apache.commons.codec.language.bm.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,6 +45,7 @@ public class LoginListener implements Listener {
                 bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
                 player.sendMessage(LangConstants.INGAME_WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
             } catch (TelegramApiException e) {
+                player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString());
                 e.printStackTrace();
             }
             return;
@@ -82,6 +82,7 @@ public class LoginListener implements Listener {
                     bot.execute(MessageFactory.loginRequest(telegramPlayer.getPlayerUUID(), telegramPlayer.getChatID(), player.getName(), player.getAddress().getHostString()));
                     player.sendMessage(LangConstants.INGAME_WAIT_FOR_LOGIN_CONFIRM.getFormattedString());
                 } catch (TelegramApiException e) {
+                    player.kickPlayer(LangConstants.INGAME_KICK_ACCOUNT_LOCKED.getFormattedString());
                     e.printStackTrace();
                 }
             }

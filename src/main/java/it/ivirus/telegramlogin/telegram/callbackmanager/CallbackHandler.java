@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CallbackHandler {
+
     private final TelegramLogin plugin = TelegramLogin.getInstance();
 
     private CallbackHandler() {
@@ -26,7 +27,9 @@ public class CallbackHandler {
 
     public void run(Update update) {
         String[] args = update.getCallbackQuery().getData().split(" ");
-        if (!commands.containsKey(args[0])) return;
+        if (!commands.containsKey(args[0])) {
+            return;
+        }
 
         commands.get(args[0]).onUpdateCall(plugin.getBot(), update, args);
     }

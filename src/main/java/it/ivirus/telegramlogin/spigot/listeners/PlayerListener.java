@@ -20,8 +20,6 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.sql.Date;
-
 public class PlayerListener implements Listener {
     private final TelegramLogin plugin;
     private final PlayerData playerData = PlayerData.getInstance();
